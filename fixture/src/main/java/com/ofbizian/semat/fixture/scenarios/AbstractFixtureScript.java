@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.apache.isis.applib.services.sudo.SudoService;
 
-public abstract class MyFixtureScript extends FixtureScript {
+public abstract class AbstractFixtureScript extends FixtureScript {
 
     @Override
     protected final void execute(final ExecutionContext ec) {

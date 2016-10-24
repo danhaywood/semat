@@ -20,7 +20,6 @@
 package com.ofbizian.semat.fixture.scenarios;
 
 import com.google.common.collect.Lists;
-import com.ofbizian.semat.fixture.dom.SkillCreate;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.isisaddons.module.security.dom.permission.ApplicationPermissionMode;
 import org.isisaddons.module.security.dom.permission.ApplicationPermissionRule;
@@ -37,9 +36,7 @@ public class UserFixture extends FixtureScript {
 
     @Override
     protected void execute(final ExecutionContext ec) {
-        final SkillCreate fs = new SkillCreate().setName("test");
 
-        ec.executeChild(this, fs);
         ec.executeChild(this, new RoleAndPermissionsFixtureScript("easter2017", "Easter 2017 Concert"));
         ec.executeChild(this, new RoleAndPermissionsFixtureScript("summer2017", "Summer 2017 Concert"));
         ec.executeChild(this, new RoleAndPermissionsFixtureScript("christmas2017", "Christmas 2017 Concert"));

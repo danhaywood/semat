@@ -19,52 +19,54 @@
 
 package com.ofbizian.semat.fixture.dom;
 
-import com.ofbizian.semat.dom.domain.ProjectMenu;
-import com.ofbizian.semat.dom.domain.Skill;
-import com.ofbizian.semat.fixture.scenarios.MyFixtureScript;
+import com.ofbizian.semat.dom.domain.Alpha;
+import com.ofbizian.semat.dom.domain.Concern;
+import com.ofbizian.semat.dom.domain.ProjectRepository;
+import com.ofbizian.semat.fixture.scenarios.AbstractFixtureScript;
 
-public class SkillCreate extends MyFixtureScript {
+public class AlphaCreate extends AbstractFixtureScript {
 
-    //region > name (input)
-    private String code;
-    /**
-     * Name of the object (required)
-     */
-    public String getCode() {
-        return code;
+    private String name;
+    private Concern concern;
+    private Alpha alpha;
+
+    public String getName() {
+        return name;
     }
 
-    public SkillCreate setName(final String code) {
-        this.code = code;
-        return this;
+    public void setName(String name) {
+        this.name = name;
     }
-    //endregion
 
-
-    //region > nurse (output)
-    private Skill skill;
-
-    /**
-     * The created simple object (output).
-     * @return
-     */
-    public Skill getSkill() {
-        return skill;
+    public Concern getConcern() {
+        return concern;
     }
-    //endregion
+
+    public void setConcern(Concern concern) {
+        this.concern = concern;
+    }
+
+    public Alpha getAlpha() {
+        return alpha;
+    }
+
+    public void setAlpha(Alpha alpha) {
+        this.alpha = alpha;
+    }
 
     @Override
     protected void doExecute(final ExecutionContext ec) {
 
-        String code = checkParam("code", ec, String.class);
+        String name = checkParam("name", ec, String.class);
+        Concern concern = checkParam("concern", ec, Concern.class);
 
-        this.skill = wrap(menu).createSkill(code);
+        this.alpha = wrap(repository).createAlpha(name, concern);
 
         // also make available to UI
-        ec.addResult(this, skill);
+        ec.addResult(this, alpha);
     }
 
     @javax.inject.Inject
-    private ProjectMenu menu;
+    private ProjectRepository repository;
 
 }

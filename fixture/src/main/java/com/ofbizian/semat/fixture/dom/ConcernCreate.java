@@ -19,18 +19,43 @@
 
 package com.ofbizian.semat.fixture.dom;
 
-import org.apache.isis.applib.fixturescripts.FixtureScript;
-import org.apache.isis.applib.services.jdosupport.IsisJdoSupport;
+import com.ofbizian.semat.dom.domain.Concern;
+import com.ofbizian.semat.dom.domain.ProjectRepository;
+import com.ofbizian.semat.fixture.scenarios.AbstractFixtureScript;
 
-public class SkillTearDown extends FixtureScript {
+public class ConcernCreate extends AbstractFixtureScript {
 
-    @Override
-    protected void execute(ExecutionContext executionContext) {
-        isisJdoSupport.executeUpdate("delete from \"simple\".\"Skill\"");
+    private String name;
+    private Concern concern;
+
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Concern getConcern() {
+        return concern;
+    }
+
+    public void setConcern(Concern concern) {
+        this.concern = concern;
+    }
+
+    @Override
+    protected void doExecute(final ExecutionContext ec) {
+
+        String name = checkParam("name", ec, String.class);
+
+        this.concern = wrap(repository).createConcern(name);
+
+        // also make available to UI
+        ec.addResult(this, concern);
+    }
 
     @javax.inject.Inject
-    private IsisJdoSupport isisJdoSupport;
+    private ProjectRepository repository;
 
 }

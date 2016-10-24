@@ -28,14 +28,12 @@ import com.google.common.collect.Maps;
 import com.ofbizian.semat.dom.DomainAppDomainModule;
 import com.ofbizian.semat.fixture.DomainAppFixtureModule;
 import com.ofbizian.semat.fixture.scenarios.RecreateProjects;
-import com.ofbizian.semat.fixture.scenarios.RecreateSkills;
 import com.ofbizian.semat.fixture.scenarios.UserFixture;
 import org.apache.isis.applib.AppManifest;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 import org.isisaddons.module.audit.AuditModule;
 import org.isisaddons.module.command.CommandModule;
 import org.isisaddons.module.security.SecurityModule;
-import org.isisaddons.module.sessionlogger.SessionLoggerModule;
 import org.isisaddons.module.settings.SettingsModule;
 
 /**
@@ -99,7 +97,6 @@ public class DomainAppAppManifest implements AppManifest {
     public List<Class<? extends FixtureScript>> getFixtures() {
         return Lists.newArrayList(
                 UserFixture.class
-                , RecreateSkills.class
                 , RecreateProjects.class
     );
     }

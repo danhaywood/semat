@@ -61,24 +61,60 @@ public class ProjectRepository {
         return object;
     }
 
-    public List<Skill> listSkills() {
-        return repositoryService.allInstances(Skill.class);
+    public List<Alpha> listAlphas() {
+        return repositoryService.allInstances(Alpha.class);
     }
 
-    public List<Skill> findSkillsByName(final String code) {
-        return repositoryService.allMatches(
-                new QueryDefault<>(
-                        Skill.class,
-                        "findByName",
-                        "code", code));
-    }
-
-    public Skill createSkill(final String code) {
-        Skill object = new Skill();
-        object.setCode(code);
+    public Alpha createAlpha(final String name, Concern concern) {
+        Alpha object = new Alpha();
+        object.setName(name);
+        object.setConcern(concern);
         serviceRegistry.injectServicesInto(object);
         object.init();
         repositoryService.persist(object);
         return object;
     }
+
+    public Concern createConcern(final String name) {
+        Concern object = new Concern();
+        object.setName(name);
+        serviceRegistry.injectServicesInto(object);
+        object.init();
+        repositoryService.persist(object);
+        return object;
+    }
+
+    public List<Concern> listConcern() {
+        return repositoryService.allInstances(Concern.class);
+    }
+
+    public State createState(final String name, String description) {
+        State object = new State();
+        object.setName(name);
+        object.setDescription(description);
+        serviceRegistry.injectServicesInto(object);
+        object.init();
+        repositoryService.persist(object);
+        return object;
+    }
+
+    public List<State> listStates() {
+        return repositoryService.allInstances(State.class);
+    }
+
+    public AlphaState createAlphaState(Alpha alpha, State state, boolean achieved) {
+        AlphaState object = new AlphaState();
+        object.setAlpha(alpha);
+        object.setState(state);
+        object.setAchieved(achieved);
+        serviceRegistry.injectServicesInto(object);
+        object.init();
+        repositoryService.persist(object);
+        return object;
+    }
+
+    public List<AlphaState> listAlphaState() {
+        return repositoryService.allInstances(AlphaState.class);
+    }
+
 }

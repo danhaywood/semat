@@ -19,47 +19,37 @@ package com.ofbizian.semat.dom.domain;
 import javax.jdo.annotations.IdentityType;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.annotation.Title;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
         schema = "simple"
 )
-@javax.jdo.annotations.Queries({
-        @javax.jdo.annotations.Query(
-                name = "findByName", language = "JDOQL",
-                value = "SELECT "
-                        + "FROM Skill "
-                        + "WHERE code.indexOf(:code) >= 0 ")
-})
-@DomainObject(
-        autoCompleteRepository = ProjectRepository.class,
-        autoCompleteAction = "findSkillsByName")
-@XStreamAlias("Skill")
-public class Skill extends AbstractPersistable {
+@DomainObject
+@XStreamAlias("State")
+public class State extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private String code;
+    @Title
+    private String name;
 
-    public String getCode() {
-        return code;
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private String description;
+
+    public String getName() {
+        return name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return code;
+    public String getDescription() {
+        return description;
     }
 
-    public int compareTo(Skill other) {
-        return new CompareToBuilder()
-                .append(this.getClass().getName(), other.getClass().getName())
-                .append(code, other.code)
-                .toComparison();
+    public void setDescription(String description) {
+        this.description = description;
     }
-
 }

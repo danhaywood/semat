@@ -36,14 +36,14 @@ import org.apache.isis.applib.services.eventbus.ActionDomainEvent;
         repositoryFor = Project.class
 )
 @DomainServiceLayout(
-        named = "Employees",
+        named = "Projects",
         menuOrder = "20"
 )
 public class ProjectMenu {
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     @MemberOrder(sequence = "1")
-    public List<Project> listAll() {
+    public List<Project> listProjects() {
         return projectRepository.listAll();
     }
 
@@ -72,16 +72,18 @@ public class ProjectMenu {
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     @MemberOrder(sequence = "4")
-    public List<Skill> listSkills() {
-        return projectRepository.listSkills();
+    public List<Alpha> listAlphas() {
+        return projectRepository.listAlphas();
     }
 
     @Action(domainEvent = CreateDomainEvent.class)
     @MemberOrder(sequence = "5")
-    public Skill createSkill(
-            @ParameterLayout(named="Code")
-            final String code) {
-        return projectRepository.createSkill(code);
+    public Alpha createAlpha(
+            @ParameterLayout(named="Name")
+            final String name,
+            @ParameterLayout(named="Concern")
+            final Concern concern) {
+        return projectRepository.createAlpha(name, concern);
     }
 
     @javax.inject.Inject

@@ -21,9 +21,10 @@ package com.ofbizian.semat.fixture.dom;
 
 import java.util.Set;
 
+import com.ofbizian.semat.dom.domain.Alpha;
+import com.ofbizian.semat.dom.domain.Concern;
 import com.ofbizian.semat.dom.domain.Project;
 import com.ofbizian.semat.dom.domain.ProjectMenu;
-import com.ofbizian.semat.dom.domain.Skill;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 public class ProjectCreate extends FixtureScript {
@@ -31,7 +32,8 @@ public class ProjectCreate extends FixtureScript {
     //region > name (input)
     private String name;
     private String code;
-    private Set<Skill> skills;
+    private Set<Alpha> alphas;
+    private Set<Concern> concerns;
 
     public String getName() {
         return name;
@@ -49,12 +51,21 @@ public class ProjectCreate extends FixtureScript {
         this.code = code;
     }
 
-    public Set<Skill> getSkills() {
-        return skills;
+    public Set<Alpha> getAlphas() {
+        return alphas;
     }
 
-    public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
+    public void setAlphas(Set<Alpha> alphas) {
+        this.alphas = alphas;
+    }
+
+
+    public Set<Concern> getConcerns() {
+        return concerns;
+    }
+
+    public void setConcerns(Set<Concern> concerns) {
+        this.concerns = concerns;
     }
 
     //region > nurse (output)
@@ -74,10 +85,10 @@ public class ProjectCreate extends FixtureScript {
 
         String name = checkParam("name", ec, String.class);
         String code = checkParam("code", ec, String.class);
-        Set<Skill> skills = checkParam("skills", ec, Set.class);
+        Set<Alpha> alphas = checkParam("alphas", ec, Set.class);
 
         this.project = wrap(menu).create(name, code);
-        this.project.setSkills(skills);
+        this.project.setAlphas(alphas);
 
         // also make available to UI
         ec.addResult(this, project);

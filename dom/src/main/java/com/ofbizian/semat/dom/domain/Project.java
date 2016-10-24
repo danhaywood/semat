@@ -44,27 +44,27 @@ public class Project extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private String name;
 
-    @javax.jdo.annotations.Persistent(table = "EmployeeSkills")
+    @javax.jdo.annotations.Persistent(table = "ProjectAlphas")
     @javax.jdo.annotations.Join()
-    private Set<Skill> skills = new TreeSet<>();
+    private Set<Alpha> alphas = new TreeSet<>();
 
-    public Set<Skill> getSkills() {
-        return skills;
+    public Set<Alpha> getAlphas() {
+        return alphas;
     }
 
-    public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
+    public void setAlphas(Set<Alpha> alphas) {
+        this.alphas = alphas;
     }
 
     @Action
-    public Project addSkill(Skill skill) {
-        getSkills().add(skill);
+    public Project addAlpha(Alpha alpha) {
+        getAlphas().add(alpha);
         return this;
     }
 
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
-    public Project removeSkill(Skill skill) {
-        getSkills().remove(skill);
+    public Project removeAlpha(Alpha alpha) {
+        getAlphas().remove(alpha);
         return this;
     }
 
@@ -84,4 +84,7 @@ public class Project extends AbstractPersistable {
         this.name = name;
     }
 
+    public String title() {
+        return name + "[" + code + "]";
+    }
 }
