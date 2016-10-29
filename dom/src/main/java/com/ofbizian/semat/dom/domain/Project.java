@@ -35,6 +35,7 @@ import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.RenderType;
 import org.apache.isis.applib.annotation.SemanticsOf;
+import org.apache.isis.applib.annotation.ViewModelLayout;
 
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
@@ -47,9 +48,7 @@ import org.apache.isis.applib.annotation.SemanticsOf;
         identityType= IdentityType.DATASTORE,
         schema = "simple"
 )
-@DomainObjectLayout(
-        bookmarking= BookmarkPolicy.AS_ROOT
-)
+@DomainObjectLayout(bookmarking= BookmarkPolicy.AS_ROOT)
 public class Project extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
@@ -84,7 +83,7 @@ public class Project extends AbstractPersistable {
     }
 
     @CollectionLayout(defaultView = "table")
-    public Set<ProjectStateView> getProjectStateViews() {
+    public Set<ProjectStateView> getAlphaStates() {
         Set<ProjectStateView> projectStateViews = new LinkedHashSet<>();
         final Set<Alpha> alphas = getAlphas();
         for (Alpha alpha : alphas) {

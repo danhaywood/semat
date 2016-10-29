@@ -17,8 +17,11 @@
 The project is based on Apache ISIS.
 
 [Apache ISIS](http://isis.apache.org/)
+[SEMAT](http://semat.org)
+
 ![Apache ISIS](https://1.bp.blogspot.com/-b0E0uscBBP0/WA8f9DChQnI/AAAAAAAAGiQ/kFswSoackoEXUOdGUzsQfBJMEtttIF83gCLcB/s1600/isis-logo.png)
 
-[SEMAT](http://semat.org)
-![README.md:23](https://1.bp.blogspot.com/-v97m2gfSAug/WA8f8wnlJsI/AAAAAAAAGiM/JjoIp0SlTU4f3iFoIEMvSJvDH8ly8iV4wCLcB/s1600/semat.png)
+![README.md:23](https://3.bp.blogspot.com/-e981eFSwahg/WBUd6pE-lYI/AAAAAAAAGmc/sJB9TqFVJ885dcyC-DYPmYy2FpizZWEFwCLcB/s1600/68747470733a2f2f312e62702e626c6f6773706f742e636f6d2f2d7639376d326766534175672f5741386638776e6c4a73492f414141414141414147694d2f4a6a6f497030536c545534663369466f49454d76534a764448386c793869563477434c63422f73313630302f73656d61742e706e67.png)
+
+
 

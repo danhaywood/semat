@@ -65,4 +65,8 @@ public class Alpha extends AbstractPersistable {
     public void setAlphaStates(SortedSet<AlphaState> alphaStates) {
         this.alphaStates = alphaStates;
     }
+
+    public String iconName() {
+        return getName();
+    }
 }

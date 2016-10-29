@@ -42,4 +42,8 @@ public class Concern extends AbstractPersistable {
         this.name = name;
     }
 
+    public String iconName() {
+        return getName();
+    }
+
 }

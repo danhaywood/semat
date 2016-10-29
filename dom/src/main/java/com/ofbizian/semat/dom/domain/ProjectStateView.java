@@ -18,10 +18,10 @@ package com.ofbizian.semat.dom.domain;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.isis.applib.annotation.ViewModel;
+import org.apache.isis.applib.annotation.ViewModelLayout;
 
 @ViewModel
 public class ProjectStateView implements Comparable <ProjectStateView>{
-
     private String alpha;
     private String concern;
     private String state;
@@ -65,5 +65,9 @@ public class ProjectStateView implements Comparable <ProjectStateView>{
                 .append(getConcern(), other.getConcern())
                 .append(getAlpha(), other.getAlpha())
                 .toComparison();
+    }
+
+    public String iconName() {
+        return getAlpha();
     }
 }

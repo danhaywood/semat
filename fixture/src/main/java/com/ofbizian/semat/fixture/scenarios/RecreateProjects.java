@@ -37,9 +37,6 @@ import com.ofbizian.semat.fixture.dom.ProjectTearDown;
 import com.ofbizian.semat.fixture.dom.StateCreate;
 
 public class RecreateProjects extends AbstractFixtureScript {
-
-    public List<String> PROJECTS = Collections.unmodifiableList(Arrays.asList("ESB", "SOE"));
-
     public RecreateProjects() {
         withDiscoverability(Discoverability.DISCOVERABLE);
     }
@@ -98,17 +95,18 @@ public class RecreateProjects extends AbstractFixtureScript {
         alphas.add(team);
         alphas.add(wayOfWorking);
 
-
-        for (int i = 0; i < PROJECTS.size(); i++) {
-            ProjectCreate projectCreate = new ProjectCreate();
-            projectCreate.setName(PROJECTS.get(i));
-            projectCreate.setCode("" + i);
-            projectCreate.setAlphas(alphas);
-
-            ec.executeChild(this, projectCreate.getName(), projectCreate);
-            Project project = projectCreate.getProject();
-            projects.add(project);
+        createProject(ec, "Standard Operating Environment", "SOE");
+        createProject(ec, "Enterprise Service Bus", "ESB");
         }
+
+    private void createProject(ExecutionContext ec, String name, String code) {
+        ProjectCreate projectCreate = new ProjectCreate();
+        projectCreate.setName(name);
+        projectCreate.setCode(code);
+        projectCreate.setAlphas(alphas);
+        ec.executeChild(this, projectCreate.getName(), projectCreate);
+        Project project = projectCreate.getProject();
+        projects.add(project);
     }
 
     private void createWayOfWorkingStates(ExecutionContext ec, Alpha wayOfWorking) {
