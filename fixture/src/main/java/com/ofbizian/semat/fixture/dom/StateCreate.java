@@ -31,6 +31,7 @@ public class StateCreate extends AbstractFixtureScript {
     private String description;
     private Alpha alpha;
     private boolean achieved;
+    private int sequence;
     private State state;
     private AlphaState alphaState;
 
@@ -74,6 +75,14 @@ public class StateCreate extends AbstractFixtureScript {
         this.achieved = achieved;
     }
 
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
     public AlphaState getAlphaState() {
         return alphaState;
     }
@@ -89,9 +98,10 @@ public class StateCreate extends AbstractFixtureScript {
         String description = checkParam("description", ec, String.class);
         Alpha alpha = checkParam("alpha", ec, Alpha.class);
         boolean achieved = checkParam("achieved", ec, Boolean.class);
+        int sequence = checkParam("sequence", ec, Integer.class);
 
         this.state = wrap(repository).createState(name, description);
-        this.alphaState = wrap(repository).createAlphaState(alpha, state, achieved);
+        this.alphaState = wrap(repository).createAlphaState(alpha, state, achieved, sequence);
 
         // also make available to UI
         ec.addResult(this, state);

@@ -16,12 +16,24 @@
 
 package com.ofbizian.semat.dom.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.jdo.annotations.IdentityType;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.isis.applib.annotation.Action;
+import org.apache.isis.applib.annotation.BookmarkPolicy;
+import org.apache.isis.applib.annotation.CollectionLayout;
+import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.Programmatic;
+import org.apache.isis.applib.annotation.PropertyLayout;
+import org.apache.isis.applib.annotation.RenderType;
 import org.apache.isis.applib.annotation.SemanticsOf;
 
 @javax.jdo.annotations.Queries({
@@ -35,12 +47,15 @@ import org.apache.isis.applib.annotation.SemanticsOf;
         identityType= IdentityType.DATASTORE,
         schema = "simple"
 )
-@XStreamAlias("Project")
+@DomainObjectLayout(
+        bookmarking= BookmarkPolicy.AS_ROOT
+)
 public class Project extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
     private String code;
 
+    @PropertyLayout(describedAs = "Unique name for this property")
     @javax.jdo.annotations.Column(allowsNull = "false")
     private String name;
 
@@ -66,6 +81,34 @@ public class Project extends AbstractPersistable {
     public Project removeAlpha(Alpha alpha) {
         getAlphas().remove(alpha);
         return this;
+    }
+
+    @CollectionLayout(defaultView = "table")
+    public Set<ProjectStateView> getProjectStateViews() {
+        Set<ProjectStateView> projectStateViews = new LinkedHashSet<>();
+        final Set<Alpha> alphas = getAlphas();
+        for (Alpha alpha : alphas) {
+            final ProjectStateView view = new ProjectStateView();
+            view.setAlpha(alpha.getName());
+            view.setConcern(alpha.getConcern().getName());
+
+            final SortedSet<AlphaState> alphaStates = alpha.getAlphaStates();
+            List<AlphaState> list = new ArrayList(alphaStates);
+            Collections.sort(list, Collections.reverseOrder());
+            Set<AlphaState> resultSet = new LinkedHashSet(list);
+            String lastState = null;
+
+            for (AlphaState alphaState : resultSet) {
+                if (alphaState.isAchieved()) {
+                    view.setAchieved(alphaState.isAchieved());
+                    break;
+                }
+                lastState = alphaState.getState().getName();
+            }
+            view.setState(lastState);
+            projectStateViews.add(view);
+        }
+        return projectStateViews;
     }
 
     public String getCode() {

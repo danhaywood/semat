@@ -35,7 +35,6 @@ import com.ofbizian.semat.fixture.dom.ConcernCreate;
 import com.ofbizian.semat.fixture.dom.ProjectCreate;
 import com.ofbizian.semat.fixture.dom.ProjectTearDown;
 import com.ofbizian.semat.fixture.dom.StateCreate;
-import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 public class RecreateProjects extends AbstractFixtureScript {
 
@@ -113,73 +112,74 @@ public class RecreateProjects extends AbstractFixtureScript {
     }
 
     private void createWayOfWorkingStates(ExecutionContext ec, Alpha wayOfWorking) {
-        getStateCreate(ec, wayOfWorking, "Principles Established", "The principles, and constraints, that shape the way-of-working are established.");
-        getStateCreate(ec, wayOfWorking, "Foundation Established", "The key practices, and tools, that form the foundation of the way of working are selected and ready for use.");
-        getStateCreate(ec, wayOfWorking, "In Use", "Some members of the team are using, and adapting, the way-of- working.");
-        getStateCreate(ec, wayOfWorking, "In Place", "All team members are using the way of working to accomplish their work.");
-        getStateCreate(ec, wayOfWorking, "Working well", "The team's way of working is working well for the team.");
-        getStateCreate(ec, wayOfWorking, "Retired", "The way of working is no longer in use by the team.");
+        createAlphaState(ec, wayOfWorking, 1, "Principles Established", "The principles, and constraints, that shape the way-of-working are established.");
+        createAlphaState(ec, wayOfWorking, 2, "Foundation Established", "The key practices, and tools, that form the foundation of the way of working are selected and ready for use.");
+        createAlphaState(ec, wayOfWorking, 3, "In Use", "Some members of the team are using, and adapting, the way-of- working.");
+        createAlphaState(ec, wayOfWorking, 4, "In Place", "All team members are using the way of working to accomplish their work.");
+        createAlphaState(ec, wayOfWorking, 5, "Working well", "The team's way of working is working well for the team.");
+        createAlphaState(ec, wayOfWorking, 6, "Retired", "The way of working is no longer in use by the team.");
     }
 
     private void createTeamStates(ExecutionContext ec, Alpha team) {
-        getStateCreate(ec, team, "Seeded", "The team’s mission is clear and the know-how needed to grow the team is in place.");
-        getStateCreate(ec, team, "Formed", "The team has been populated with enough committed people to start the mission.");
-        getStateCreate(ec, team, "Collaborating", "The team members are working together as one unit.");
-        getStateCreate(ec, team, "Performing", "The team is working effectively and efficiently.");
-        getStateCreate(ec, team, "Adjourned", "The team is no longer accountable for carrying out its mission.");
+        createAlphaState(ec, team, 1, "Seeded", "The team’s mission is clear and the know-how needed to grow the team is in place.");
+        createAlphaState(ec, team, 2, "Formed", "The team has been populated with enough committed people to start the mission.");
+        createAlphaState(ec, team, 3, "Collaborating", "The team members are working together as one unit.");
+        createAlphaState(ec, team, 4, "Performing", "The team is working effectively and efficiently.");
+        createAlphaState(ec, team, 5, "Adjourned", "The team is no longer accountable for carrying out its mission.");
     }
 
     private void createWorkStates(ExecutionContext ec, Alpha work) {
-        getStateCreate(ec, work, "Initiated", "The work has been requested.");
-        getStateCreate(ec, work, "Prepared", "All pre-conditions for starting the work have been met.");
-        getStateCreate(ec, work, "Started", "The work is proceeding.");
-        getStateCreate(ec, work, "Under Control", "The work is going well, risks are under control, and productivity levels are sufficient to achieve a satisfactory result.");
-        getStateCreate(ec, work, "Concluded", "The work to produce the results has been concluded.");
-        getStateCreate(ec, work, "Closed", "All remaining housekeeping tasks have been completed and the work has been officially closed.");
+        createAlphaState(ec, work, 1, "Initiated", "The work has been requested.");
+        createAlphaState(ec, work, 2, "Prepared", "All pre-conditions for starting the work have been met.");
+        createAlphaState(ec, work, 3, "Started", "The work is proceeding.");
+        createAlphaState(ec, work, 4, "Under Control", "The work is going well, risks are under control, and productivity levels are sufficient to achieve a satisfactory result.");
+        createAlphaState(ec, work, 5, "Concluded", "The work to produce the results has been concluded.");
+        createAlphaState(ec, work, 6, "Closed", "All remaining housekeeping tasks have been completed and the work has been officially closed.");
     }
 
     private void createOpportunityStates(ExecutionContext ec, Alpha opportunity) {
-        getStateCreate(ec, opportunity, "Identified", "A commercial, social, or business opportunity has been identified that could be addressed by a software-based solution.");
-        getStateCreate(ec, opportunity, "Solution Needed", "The need for a software-based solution has been confirmed.");
-        getStateCreate(ec, opportunity, "Value Established", "The value of a successful solution has been established.");
-        getStateCreate(ec, opportunity, "Viable", "It is agreed that a solution can be produced quickly and cheaply enough to successfully address the opportunity.");
-        getStateCreate(ec, opportunity, "Addressed", "A solution has been produced that demonstrably addresses the opportunity.");
-        getStateCreate(ec, opportunity, "Benefit Accrued", "The operational use or sale of the solution is creating tangible benefits.");
+        createAlphaState(ec, opportunity, 1, "Identified", "A commercial, social, or business opportunity has been identified that could be addressed by a software-based solution.");
+        createAlphaState(ec, opportunity, 2, "Solution Needed", "The need for a software-based solution has been confirmed.");
+        createAlphaState(ec, opportunity, 3, "Value Established", "The value of a successful solution has been established.");
+        createAlphaState(ec, opportunity, 4, "Viable", "It is agreed that a solution can be produced quickly and cheaply enough to successfully address the opportunity.");
+        createAlphaState(ec, opportunity, 5, "Addressed", "A solution has been produced that demonstrably addresses the opportunity.");
+        createAlphaState(ec, opportunity, 6, "Benefit Accrued", "The operational use or sale of the solution is creating tangible benefits.");
     }
 
     private void createStakeholdersStates(ExecutionContext ec, Alpha stakeholders) {
-        getStateCreate(ec, stakeholders, "Recognized", "Stakeholders have been identified.");
-        getStateCreate(ec, stakeholders, "Represented", "The mechanisms for involving the stakeholders are agreed and the stakeholder representatives have been appointed.");
-        getStateCreate(ec, stakeholders, "Involved", "The stakeholder representatives are actively involved in the work and fulfilling their responsibilities.");
-        getStateCreate(ec, stakeholders, "In Agreement", "The stakeholder representatives are in agreement.");
-        getStateCreate(ec, stakeholders, "Satisfied for Deployment", "The minimal expectations of the stakeholder representatives have been achieved.");
-        getStateCreate(ec, stakeholders, "Satisfied in Use", "The system has met or exceeds the minimal stakeholder expectations.");
+        createAlphaState(ec, stakeholders, 1, "Recognized", "Stakeholders have been identified.");
+        createAlphaState(ec, stakeholders, 2, "Represented", "The mechanisms for involving the stakeholders are agreed and the stakeholder representatives have been appointed.");
+        createAlphaState(ec, stakeholders, 3, "Involved", "The stakeholder representatives are actively involved in the work and fulfilling their responsibilities.");
+        createAlphaState(ec, stakeholders, 4, "In Agreement", "The stakeholder representatives are in agreement.");
+        createAlphaState(ec, stakeholders, 5, "Satisfied for Deployment", "The minimal expectations of the stakeholder representatives have been achieved.");
+        createAlphaState(ec, stakeholders, 6, "Satisfied in Use", "The system has met or exceeds the minimal stakeholder expectations.");
     }
 
     private void createRequirementsStates(ExecutionContext ec, Alpha requirements) {
-        getStateCreate(ec, requirements, "Architecture Selected", "An architecture has been selected that addresses the key technical risks and any applicable organizational constraints.");
-        getStateCreate(ec, requirements, "Demonstrable", "An executable version of the system is available that demonstrates the architecture is fit for purpose and supports testing.");
-        getStateCreate(ec, requirements, "Usable", "The system is usable and demonstrates all of the quality characteristics of an operational system.");
-        getStateCreate(ec, requirements, "Ready", "The system (as a whole) has been accepted for deployment in a live environment.");
-        getStateCreate(ec, requirements, "Operational", "The system is in use in an operational environment.");
-        getStateCreate(ec, requirements, "Retired", "The system is no longer supported.");
+        createAlphaState(ec, requirements, 1, "Architecture Selected", "An architecture has been selected that addresses the key technical risks and any applicable organizational constraints.");
+        createAlphaState(ec, requirements, 2, "Demonstrable", "An executable version of the system is available that demonstrates the architecture is fit for purpose and supports testing.");
+        createAlphaState(ec, requirements, 3, "Usable", "The system is usable and demonstrates all of the quality characteristics of an operational system.");
+        createAlphaState(ec, requirements, 4, "Ready", "The system (as a whole) has been accepted for deployment in a live environment.");
+        createAlphaState(ec, requirements, 5, "Operational", "The system is in use in an operational environment.");
+        createAlphaState(ec, requirements, 6, "Retired", "The system is no longer supported.");
     }
 
     private void createSoftwareSystemStates(ExecutionContext ec, Alpha softwareSystem) {
-        getStateCreate(ec, softwareSystem, "Conceived", "The need for a new system has been agreed.");
-        getStateCreate(ec, softwareSystem, "Bounded", "The purpose and extent of the new system are clear.");
-        getStateCreate(ec, softwareSystem, "Coherent", "The requirements provide a consistent description of the essential");
-        getStateCreate(ec, softwareSystem, "Acceptable", "The requirements describe a system that is acceptable to the stakeholders.");
-        getStateCreate(ec, softwareSystem, "Addressed", "Enough of the requirements have been addressed to satisfy the need for a new system in a way that is acceptable to the stakeholders.");
-        getStateCreate(ec, softwareSystem, "Fulfilled", "The requirements that have been addressed fully satisfy the need for a new system.");
+        createAlphaState(ec, softwareSystem, 1, "Conceived", "The need for a new system has been agreed.");
+        createAlphaState(ec, softwareSystem, 2, "Bounded", "The purpose and extent of the new system are clear.");
+        createAlphaState(ec, softwareSystem, 3, "Coherent", "The requirements provide a consistent description of the essential");
+        createAlphaState(ec, softwareSystem, 4, "Acceptable", "The requirements describe a system that is acceptable to the stakeholders.");
+        createAlphaState(ec, softwareSystem, 5, "Addressed", "Enough of the requirements have been addressed to satisfy the need for a new system in a way that is acceptable to the stakeholders.");
+        createAlphaState(ec, softwareSystem, 6, "Fulfilled", "The requirements that have been addressed fully satisfy the need for a new system.");
     }
 
 
 
-    private void getStateCreate(ExecutionContext ec, Alpha opportunity, String name, String description) {
+    private void createAlphaState(ExecutionContext ec, Alpha alpha, int sequence, String name, String description) {
         StateCreate stateCreate = new StateCreate();
-        stateCreate.setAlpha(opportunity);
+        stateCreate.setAlpha(alpha);
         stateCreate.setAchieved(false);
+        stateCreate.setSequence(sequence);
         stateCreate.setName(name);
         stateCreate.setDescription(description);
 

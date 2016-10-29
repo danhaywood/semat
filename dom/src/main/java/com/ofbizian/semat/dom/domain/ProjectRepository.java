@@ -102,11 +102,12 @@ public class ProjectRepository {
         return repositoryService.allInstances(State.class);
     }
 
-    public AlphaState createAlphaState(Alpha alpha, State state, boolean achieved) {
+    public AlphaState createAlphaState(Alpha alpha, State state, boolean achieved, int sequence) {
         AlphaState object = new AlphaState();
         object.setAlpha(alpha);
         object.setState(state);
         object.setAchieved(achieved);
+        object.setSequence(sequence);
         serviceRegistry.injectServicesInto(object);
         object.init();
         repositoryService.persist(object);

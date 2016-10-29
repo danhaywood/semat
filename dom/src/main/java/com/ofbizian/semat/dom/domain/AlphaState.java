@@ -19,6 +19,9 @@ package com.ofbizian.semat.dom.domain;
 import javax.jdo.annotations.IdentityType;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.apache.commons.lang3.builder.CompareToBuilder;
+import org.apache.isis.applib.annotation.Programmatic;
+import org.apache.isis.applib.annotation.Title;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
@@ -36,6 +39,10 @@ public class AlphaState extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private boolean achieved;
 
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private int sequence;
+
+    @Title(sequence = "1")
     public Alpha getAlpha() {
         return alpha;
     }
@@ -44,6 +51,7 @@ public class AlphaState extends AbstractPersistable {
         this.alpha = alpha;
     }
 
+    @Title(sequence = "2")
     public State getState() {
         return state;
     }
@@ -58,5 +66,22 @@ public class AlphaState extends AbstractPersistable {
 
     public void setAchieved(boolean achieved) {
         this.achieved = achieved;
+    }
+
+    @Programmatic
+    public int getSequence() {
+        return sequence;
+    }
+
+    public void setSequence(int sequence) {
+        this.sequence = sequence;
+    }
+
+    @Override
+    public int compareTo(AbstractPersistable other) {
+        return new CompareToBuilder()
+                .append(getSequence(), ((AlphaState) other).getSequence() )
+                .append(getClass().getName(), other.getClass().getName())
+                .toComparison();
     }
 }

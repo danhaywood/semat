@@ -17,6 +17,7 @@
 package com.ofbizian.semat.dom.domain;
 
 import java.util.List;
+import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
@@ -38,7 +39,7 @@ public class Alpha extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private Concern concern;
 
-    private List<AlphaState> alphaStates;
+    private SortedSet<AlphaState> alphaStates;
 
     public String getName() {
         return name;
@@ -57,11 +58,11 @@ public class Alpha extends AbstractPersistable {
     }
 
     @javax.jdo.annotations.Persistent(mappedBy = "alpha", defaultFetchGroup = "true")
-    public List<AlphaState> getAlphaStates() {
+    public SortedSet<AlphaState> getAlphaStates() {
         return alphaStates;
     }
 
-    public void setAlphaStates(List<AlphaState> alphaStates) {
+    public void setAlphaStates(SortedSet<AlphaState> alphaStates) {
         this.alphaStates = alphaStates;
     }
 }
