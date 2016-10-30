@@ -29,13 +29,10 @@ import org.apache.isis.applib.services.wrapper.WrapperFactory;
 @ViewModel
 public class HomePageViewModel {
 
-    //region > title
     public TranslatableString title() {
         return TranslatableString.tr("{num} projects", "num", getProjects().size());
     }
-    //endregion
 
-    //region > object (collection)
     @org.apache.isis.applib.annotation.HomePage
     public List<Project> getProjects() {
         return wrapperFactory.wrap(repository).listAll();

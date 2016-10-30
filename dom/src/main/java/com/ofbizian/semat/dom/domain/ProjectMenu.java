@@ -37,7 +37,7 @@ import org.apache.isis.applib.services.eventbus.ActionDomainEvent;
 )
 @DomainServiceLayout(
         named = "Projects",
-        menuOrder = "20"
+        menuOrder = "10"
 )
 public class ProjectMenu {
     @Action(semantics = SemanticsOf.SAFE)
@@ -59,7 +59,8 @@ public class ProjectMenu {
     }
 
     public static class CreateDomainEvent extends ActionDomainEvent<ProjectMenu> {}
-    @Action(domainEvent = CreateDomainEvent.class)
+    @Action(domainEvent = CreateDomainEvent.class,
+            semantics = SemanticsOf.NON_IDEMPOTENT)
     @MemberOrder(sequence = "3")
     public Project create(
             @ParameterLayout(named="Name")
@@ -76,7 +77,7 @@ public class ProjectMenu {
         return projectRepository.listAlphas();
     }
 
-    @Action(domainEvent = CreateDomainEvent.class)
+    @Action(domainEvent = CreateDomainEvent.class, semantics = SemanticsOf.NON_IDEMPOTENT)
     @MemberOrder(sequence = "5")
     public Alpha createAlpha(
             @ParameterLayout(named="Name")

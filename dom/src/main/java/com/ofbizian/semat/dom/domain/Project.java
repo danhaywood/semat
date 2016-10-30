@@ -27,15 +27,7 @@ import java.util.TreeSet;
 import javax.jdo.annotations.IdentityType;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import org.apache.isis.applib.annotation.Action;
-import org.apache.isis.applib.annotation.BookmarkPolicy;
-import org.apache.isis.applib.annotation.CollectionLayout;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
-import org.apache.isis.applib.annotation.Programmatic;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.RenderType;
-import org.apache.isis.applib.annotation.SemanticsOf;
-import org.apache.isis.applib.annotation.ViewModelLayout;
+import org.apache.isis.applib.annotation.*;
 
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
@@ -57,6 +49,10 @@ public class Project extends AbstractPersistable {
     @PropertyLayout(describedAs = "Unique name for this property")
     @javax.jdo.annotations.Column(allowsNull = "false")
     private String name;
+
+    @javax.jdo.annotations.Column(allowsNull = "true")
+    @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
+    private String description;
 
     @javax.jdo.annotations.Persistent(table = "ProjectAlphas")
     @javax.jdo.annotations.Join()
@@ -87,7 +83,7 @@ public class Project extends AbstractPersistable {
         Set<ProjectStateView> projectStateViews = new LinkedHashSet<>();
         final Set<Alpha> alphas = getAlphas();
         for (Alpha alpha : alphas) {
-            final ProjectStateView view = new ProjectStateView();
+            ProjectStateView view = new ProjectStateView();
             view.setAlpha(alpha.getName());
             view.setConcern(alpha.getConcern().getName());
 
@@ -98,11 +94,11 @@ public class Project extends AbstractPersistable {
             String lastState = null;
 
             for (AlphaState alphaState : resultSet) {
+                lastState = alphaState.getState().getName();
                 if (alphaState.isAchieved()) {
                     view.setAchieved(alphaState.isAchieved());
                     break;
                 }
-                lastState = alphaState.getState().getName();
             }
             view.setState(lastState);
             projectStateViews.add(view);
@@ -126,7 +122,16 @@ public class Project extends AbstractPersistable {
         this.name = name;
     }
 
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String title() {
-        return name + "[" + code + "]";
+        return "[" + code + "] " + name;
     }
 }

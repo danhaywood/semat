@@ -21,6 +21,7 @@ import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.Title;
 
@@ -39,6 +40,7 @@ public class Alpha extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private Concern concern;
 
+    @CollectionLayout(defaultView = "table")
     private SortedSet<AlphaState> alphaStates;
 
     public String getName() {
