@@ -248,6 +248,119 @@
                 </pluginManagement>
             </build>
         </profile>
+
+
+
+        <profile>
+            <id>docker</id>
+
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>0.16.9</version>
+
+
+                        <!--<configuration>-->
+                            <!--<images>-->
+                                <!--<image>-->
+                                    <!--<alias>semat</alias>-->
+                                    <!--<name>ofbizian/semat:${project.version}</name>-->
+
+                                    <!--<build>-->
+                                        <!--<from>java:8</from>-->
+                                        <!--<assembly>-->
+                                            <!--<descriptor>docker-assembly.xml</descriptor>-->
+                                        <!--</assembly>-->
+                                        <!--<cmd>-->
+                                            <!--<shell>java -jar /maven/service.jar</shell>-->
+                                        <!--</cmd>-->
+                                    <!--</build>-->
+
+                                    <!--<run>-->
+                                        <!--<ports>-->
+                                            <!--<port>tomcat.port:8080</port>-->
+                                        <!--</ports>-->
+                                        <!--<wait>-->
+                                            <!--<http>-->
+                                                <!--<url>http://localhost:${tomcat.port}/access</url>-->
+                                            <!--</http>-->
+                                            <!--<time>10000</time>-->
+                                        <!--</wait>-->
+                                    <!--</run>-->
+                                <!--</image>-->
+                            <!--</images>-->
+                        <!--</configuration>-->
+
+
+                        <configuration>
+                            <logDate>default</logDate>
+                            <autoPull>true</autoPull>
+                            <images>
+                                <image>
+                                    <alias>semat</alias>
+                                    <name>bibryam/semat:${project.version}</name>
+                                    <build>
+                                        <cleanup>false</cleanup>
+                                        <optimise>true</optimise>
+                                        <!--<from>java:8u40</from>-->
+                                        <from>tomcat:7.0.72-jre7</from>
+                                        <maintainer>Bilgin Ibryam</maintainer>
+                                        <tags>
+                                            <tag>latest</tag>
+                                            <tag>${project.version}</tag>
+                                        </tags>
+                                        <assembly>
+                                            <descriptorRef>rootWar</descriptorRef>
+                                        </assembly>
+                                        <ports>
+                                            <port>8080</port>
+                                        </ports>
+                                        <runCmds>
+                                            <runCmd>rm -fr /usr/local/tomcat/webapps/*</runCmd>
+                                            <runCmd>mv /maven/ROOT.war /usr/local/tomcat/webapps/</runCmd>
+                                            <!--<runCmd>cp tomcat-users.xml /usr/local/tomcat/conf/</runCmd>-->
+                                        </runCmds>
+                                        <cmd>
+                                            <shell>
+                                                catalina.sh run
+                                            </shell>
+                                        </cmd>
+                                    </build>
+                                    <run>
+                                        <env>
+                                            <CATALINA_OPTS>-Djava.security.egd=file:/dev/./urandom -Xmx512m</CATALINA_OPTS>
+                                        </env>
+                                        <ports>
+                                            <port>8282:8080</port>
+                                        </ports>
+                                        <wait>
+                                            <!--<url>http://${docker.host.address}:8080</url>-->
+                                            <url>http://10.1.2.2:8282</url>
+                                            <time>60000</time>
+                                        </wait>
+                                        <log>
+                                            <color>cyan</color>
+                                            <prefix>CML</prefix>
+                                        </log>
+                                    </run>
+                                </image>
+                            </images>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>start</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
 </project>

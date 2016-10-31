@@ -171,8 +171,6 @@ public class RecreateProjects extends AbstractFixtureScript {
         createAlphaState(ec, softwareSystem, 6, "Fulfilled", "The requirements that have been addressed fully satisfy the need for a new system.");
     }
 
-
-
     private void createAlphaState(ExecutionContext ec, Alpha alpha, int sequence, String name, String description) {
         StateCreate stateCreate = new StateCreate();
         stateCreate.setAlpha(alpha);

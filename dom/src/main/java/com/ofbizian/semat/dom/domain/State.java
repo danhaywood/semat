@@ -18,16 +18,16 @@ package com.ofbizian.semat.dom.domain;
 
 import javax.jdo.annotations.IdentityType;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Title;
+import org.apache.isis.applib.annotation.Where;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
         schema = "simple"
 )
 @DomainObject
-@XStreamAlias("State")
 public class State extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
@@ -35,6 +35,7 @@ public class State extends AbstractPersistable {
     private String name;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
+    @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
     private String description;
 
     public String getName() {

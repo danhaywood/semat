@@ -21,7 +21,9 @@ import javax.jdo.annotations.IdentityType;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.isis.applib.annotation.Programmatic;
+import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Title;
+import org.apache.isis.applib.annotation.Where;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
@@ -43,6 +45,7 @@ public class AlphaState extends AbstractPersistable {
     private int sequence;
 
     @Title(sequence = "1")
+    @PropertyLayout(hidden = Where.PARENTED_TABLES)
     public Alpha getAlpha() {
         return alpha;
     }

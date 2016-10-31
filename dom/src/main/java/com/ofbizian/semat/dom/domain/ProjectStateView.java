@@ -18,23 +18,22 @@ package com.ofbizian.semat.dom.domain;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
 import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Nature;
 
 @DomainObject(nature = Nature.VIEW_MODEL)
 public class ProjectStateView implements Comparable <ProjectStateView>{
-    private String alpha;
+    private Alpha alpha;
     private String concern;
-    private String state;
+    private State state;
     private boolean achieved;
 
     @MemberOrder(sequence="1")
-    public String getAlpha() {
+    public Alpha getAlpha() {
         return alpha;
     }
 
-    public void setAlpha(String alpha) {
+    public void setAlpha(Alpha alpha) {
         this.alpha = alpha;
     }
 
@@ -48,11 +47,11 @@ public class ProjectStateView implements Comparable <ProjectStateView>{
     }
 
     @MemberOrder(sequence="3")
-    public String getState() {
+    public State getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(State state) {
         this.state = state;
     }
 
@@ -74,6 +73,6 @@ public class ProjectStateView implements Comparable <ProjectStateView>{
     }
 
     public String iconName() {
-        return getAlpha();
+        return getAlpha().getName();
     }
 }

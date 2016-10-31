@@ -78,23 +78,23 @@ public class Project extends AbstractPersistable {
         return this;
     }
 
-    @CollectionLayout(defaultView = "table")
+    @CollectionLayout(defaultView = "table", named = "Alpha States")
     public Set<ProjectStateView> getAlphaStates() {
         Set<ProjectStateView> projectStateViews = new LinkedHashSet<>();
         final Set<Alpha> alphas = getAlphas();
         for (Alpha alpha : alphas) {
             ProjectStateView view = new ProjectStateView();
-            view.setAlpha(alpha.getName());
+            view.setAlpha(alpha);
             view.setConcern(alpha.getConcern().getName());
 
             final SortedSet<AlphaState> alphaStates = alpha.getAlphaStates();
             List<AlphaState> list = new ArrayList(alphaStates);
             Collections.sort(list, Collections.reverseOrder());
             Set<AlphaState> resultSet = new LinkedHashSet(list);
-            String lastState = null;
+            State lastState = null;
 
             for (AlphaState alphaState : resultSet) {
-                lastState = alphaState.getState().getName();
+                lastState = alphaState.getState();
                 if (alphaState.isAchieved()) {
                     view.setAchieved(alphaState.isAchieved());
                     break;
