@@ -16,8 +16,10 @@
 
 package com.ofbizian.semat.dom.domain;
 
+import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
+import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Title;
@@ -37,6 +39,18 @@ public class State extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
     private String description;
+
+    private SortedSet<Checklist> checklists;
+
+    @CollectionLayout(defaultView = "table")
+    @javax.jdo.annotations.Persistent(mappedBy = "state", defaultFetchGroup = "true")
+    public SortedSet<Checklist> getChecklists() {
+        return checklists;
+    }
+
+    public void setChecklists(SortedSet<Checklist> checklists) {
+        this.checklists = checklists;
+    }
 
     public String getName() {
         return name;

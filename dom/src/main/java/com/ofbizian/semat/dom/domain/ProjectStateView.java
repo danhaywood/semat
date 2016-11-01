@@ -73,6 +73,6 @@ public class ProjectStateView implements Comparable <ProjectStateView>{
     }
 
     public String iconName() {
-        return getAlpha().getName();
+        return getAlpha().toString();
     }
 }

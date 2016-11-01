@@ -28,11 +28,12 @@ import org.apache.isis.applib.annotation.Where;
         identityType= IdentityType.DATASTORE,
         schema = "simple"
 )
-public class AlphaState extends AbstractPersistable {
+public class Checklist extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private Alpha alpha;
+    private Item item;
 
+    @PropertyLayout(hidden = Where.PARENTED_TABLES)
     @javax.jdo.annotations.Column(allowsNull = "false")
     private State state;
 
@@ -43,13 +44,12 @@ public class AlphaState extends AbstractPersistable {
     private int sequence;
 
     @Title(sequence = "1")
-    @PropertyLayout(hidden = Where.PARENTED_TABLES)
-    public Alpha getAlpha() {
-        return alpha;
+    public Item getItem() {
+        return item;
     }
 
-    public void setAlpha(Alpha alpha) {
-        this.alpha = alpha;
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     @Title(sequence = "2")
@@ -81,7 +81,7 @@ public class AlphaState extends AbstractPersistable {
     @Override
     public int compareTo(AbstractPersistable other) {
         return new CompareToBuilder()
-                .append(getSequence(), ((AlphaState) other).getSequence() )
+                .append(getSequence(), ((Checklist) other).getSequence() )
                 .append(getClass().getName(), other.getClass().getName())
                 .toComparison();
     }

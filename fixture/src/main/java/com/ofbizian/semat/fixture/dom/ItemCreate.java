@@ -19,36 +19,19 @@
 
 package com.ofbizian.semat.fixture.dom;
 
-import com.ofbizian.semat.dom.domain.Alpha;
-import com.ofbizian.semat.dom.domain.AlphaState;
+import com.ofbizian.semat.dom.domain.Checklist;
+import com.ofbizian.semat.dom.domain.Item;
 import com.ofbizian.semat.dom.domain.ProjectRepository;
 import com.ofbizian.semat.dom.domain.State;
 import com.ofbizian.semat.fixture.scenarios.AbstractFixtureScript;
 
-public class StateCreate extends AbstractFixtureScript {
-    private String name;
+public class ItemCreate extends AbstractFixtureScript {
     private String description;
-    private Alpha alpha;
     private boolean achieved;
     private int sequence;
     private State state;
-    private AlphaState alphaState;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
+    private Item item;
+    private Checklist checklist;
 
     public String getDescription() {
         return description;
@@ -56,14 +39,6 @@ public class StateCreate extends AbstractFixtureScript {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Alpha getAlpha() {
-        return alpha;
-    }
-
-    public void setAlpha(Alpha alpha) {
-        this.alpha = alpha;
     }
 
     public boolean isAchieved() {
@@ -82,27 +57,42 @@ public class StateCreate extends AbstractFixtureScript {
         this.sequence = sequence;
     }
 
-    public AlphaState getAlphaState() {
-        return alphaState;
+    public Item getItem() {
+        return item;
     }
 
-    public void setAlphaState(AlphaState alphaState) {
-        this.alphaState = alphaState;
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Checklist getChecklist() {
+        return checklist;
+    }
+
+    public void setChecklist(Checklist checklist) {
+        this.checklist = checklist;
+    }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
     }
 
     @Override
     protected void doExecute(final ExecutionContext ec) {
-        String name = checkParam("name", ec, String.class);
         String description = checkParam("description", ec, String.class);
-        Alpha alpha = checkParam("alpha", ec, Alpha.class);
+        State state = checkParam("state", ec, State.class);
         boolean achieved = checkParam("achieved", ec, Boolean.class);
         int sequence = checkParam("sequence", ec, Integer.class);
 
-        this.state = wrap(repository).createState(name, description);
-        this.alphaState = wrap(repository).createAlphaState(alpha, state, achieved, sequence);
+        this.item = wrap(repository).createItem(description);
+        this.checklist = wrap(repository).createChecklist(state, item, achieved, sequence);
 
-        ec.addResult(this, state);
-        ec.addResult(this, alphaState);
+        ec.addResult(this, item);
+        ec.addResult(this, checklist);
     }
 
     @javax.inject.Inject

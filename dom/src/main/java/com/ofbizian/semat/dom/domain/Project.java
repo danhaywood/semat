@@ -16,18 +16,17 @@
 
 package com.ofbizian.semat.dom.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.jdo.annotations.IdentityType;
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.annotation.Action;
+import org.apache.isis.applib.annotation.BookmarkPolicy;
+import org.apache.isis.applib.annotation.CollectionLayout;
+import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.PropertyLayout;
+import org.apache.isis.applib.annotation.SemanticsOf;
+import org.apache.isis.applib.annotation.Where;
 
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
@@ -54,57 +53,78 @@ public class Project extends AbstractPersistable {
     @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
     private String description;
 
-    @javax.jdo.annotations.Persistent(table = "ProjectAlphas")
-    @javax.jdo.annotations.Join()
-    private Set<Alpha> alphas = new TreeSet<>();
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private Opportunity opportunity;
 
-    public Set<Alpha> getAlphas() {
-        return alphas;
-    }
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private Stakeholders stakeholders;
 
-    public void setAlphas(Set<Alpha> alphas) {
-        this.alphas = alphas;
-    }
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private Requirements requirements;
 
-    @Action
-    public Project addAlpha(Alpha alpha) {
-        getAlphas().add(alpha);
-        return this;
-    }
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private SoftwareSystem softwareSystem;
 
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
-    public Project removeAlpha(Alpha alpha) {
-        getAlphas().remove(alpha);
-        return this;
-    }
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private Work work;
 
-    @CollectionLayout(defaultView = "table", named = "Alpha States")
-    public Set<ProjectStateView> getAlphaStates() {
-        Set<ProjectStateView> projectStateViews = new LinkedHashSet<>();
-        final Set<Alpha> alphas = getAlphas();
-        for (Alpha alpha : alphas) {
-            ProjectStateView view = new ProjectStateView();
-            view.setAlpha(alpha);
-            view.setConcern(alpha.getConcern().getName());
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private Team team;
 
-            final SortedSet<AlphaState> alphaStates = alpha.getAlphaStates();
-            List<AlphaState> list = new ArrayList(alphaStates);
-            Collections.sort(list, Collections.reverseOrder());
-            Set<AlphaState> resultSet = new LinkedHashSet(list);
-            State lastState = null;
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private WayOfWorking wayOfWorking;
 
-            for (AlphaState alphaState : resultSet) {
-                lastState = alphaState.getState();
-                if (alphaState.isAchieved()) {
-                    view.setAchieved(alphaState.isAchieved());
-                    break;
-                }
-            }
-            view.setState(lastState);
-            projectStateViews.add(view);
-        }
-        return projectStateViews;
-    }
+//    @javax.jdo.annotations.Persistent(table = "ProjectAlphas")
+//    @javax.jdo.annotations.Join()
+//    private Set<Alpha> alphas = new TreeSet<>();
+//
+//    public Set<Alpha> getAlphas() {
+//        return alphas;
+//    }
+//
+//    public void setAlphas(Set<Alpha> alphas) {
+//        this.alphas = alphas;
+//    }
+//
+//    @Action
+//    public Project addAlpha(Alpha alpha) {
+//        getAlphas().add(alpha);
+//        return this;
+//    }
+//
+//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
+//    public Project removeAlpha(Alpha alpha) {
+//        getAlphas().remove(alpha);
+//        return this;
+//    }
+//
+//    @CollectionLayout(defaultView = "table", named = "Alpha States")
+//    public Set<ProjectStateView> getAlphaStates() {
+//        Set<ProjectStateView> projectStateViews = new LinkedHashSet<>();
+//        final Set<Alpha> alphas = getAlphas();
+//        for (Alpha alpha : alphas) {
+//            ProjectStateView view = new ProjectStateView();
+//            view.setAlpha(alpha);
+//            view.setConcern(alpha.getConcern().getName());
+//
+//            final SortedSet<AlphaState> alphaStates = alpha.getAlphaStates();
+//            List<AlphaState> list = new ArrayList(alphaStates);
+//            Collections.sort(list, Collections.reverseOrder());
+//            Set<AlphaState> resultSet = new LinkedHashSet(list);
+//            State lastState = null;
+//
+//            for (AlphaState alphaState : resultSet) {
+//                lastState = alphaState.getState();
+//                if (alphaState.isAchieved()) {
+//                    view.setAchieved(alphaState.isAchieved());
+//                    break;
+//                }
+//            }
+//            view.setState(lastState);
+//            projectStateViews.add(view);
+//        }
+//        return projectStateViews;
+//    }
 
     public String getCode() {
         return code;
@@ -122,7 +142,6 @@ public class Project extends AbstractPersistable {
         this.name = name;
     }
 
-
     public String getDescription() {
         return description;
     }
@@ -131,7 +150,98 @@ public class Project extends AbstractPersistable {
         this.description = description;
     }
 
+    public Opportunity getOpportunity() {
+        return opportunity;
+    }
+
+    public void setOpportunity(Opportunity opportunity) {
+        this.opportunity = opportunity;
+    }
+
+    public Stakeholders getStakeholders() {
+        return stakeholders;
+    }
+
+    public void setStakeholders(Stakeholders stakeholders) {
+        this.stakeholders = stakeholders;
+    }
+
+    public Requirements getRequirements() {
+        return requirements;
+    }
+
+    public void setRequirements(Requirements requirements) {
+        this.requirements = requirements;
+    }
+
+    public SoftwareSystem getSoftwareSystem() {
+        return softwareSystem;
+    }
+
+    public void setSoftwareSystem(SoftwareSystem softwareSystem) {
+        this.softwareSystem = softwareSystem;
+    }
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public WayOfWorking getWayOfWorking() {
+        return wayOfWorking;
+    }
+
+    public void setWayOfWorking(WayOfWorking wayOfWorking) {
+        this.wayOfWorking = wayOfWorking;
+    }
+
     public String title() {
         return "[" + code + "] " + name;
     }
+
+    @CollectionLayout(named="Opportunity")
+    public Set<AlphaState> getOpportunityAlphaStates() {
+        return opportunity.getAlphaStates();
+    }
+    @CollectionLayout(named="Stakeholders")
+    public Set<AlphaState> getStakeholdersAlphaStates() {
+        return stakeholders.getAlphaStates();
+    }
+
+    @CollectionLayout(named="Requirements")
+    public Set<AlphaState> getRequirementsAlphaStates() {
+        return requirements.getAlphaStates();
+    }
+
+    @CollectionLayout(named="Software System")
+    public Set<AlphaState> getSoftwareSystemAlphaStates() {
+        return softwareSystem.getAlphaStates();
+    }
+
+    @CollectionLayout(named="Work")
+    public Set<AlphaState> getWorkAlphaStates() {
+        return work.getAlphaStates();
+    }
+
+    @CollectionLayout(named="Team")
+    public Set<AlphaState> getTeamAlphaStates() {
+        return team.getAlphaStates();
+    }
+
+    @CollectionLayout(named="Way of Working")
+    public Set<AlphaState> getWayOfWorkingAlphaStates() {
+        return wayOfWorking.getAlphaStates();
+    }
+
 }

@@ -26,11 +26,11 @@ public class ProjectTearDown extends FixtureScript {
 
     @Override
     protected void execute(ExecutionContext executionContext) {
-//        isisJdoSupport.executeUpdate("delete from \"simple\".\"ProjectSkills\"");
         isisJdoSupport.executeUpdate("delete from \"simple\".\"Project\"");
         isisJdoSupport.executeUpdate("delete from \"simple\".\"AlphaState\"");
         isisJdoSupport.executeUpdate("delete from \"simple\".\"Alpha\"");
-        isisJdoSupport.executeUpdate("delete from \"simple\".\"Concern\"");
+        isisJdoSupport.executeUpdate("delete from \"simple\".\"Checklist\"");
+        isisJdoSupport.executeUpdate("delete from \"simple\".\"Item\"");
         isisJdoSupport.executeUpdate("delete from \"simple\".\"State\"");
     }
 

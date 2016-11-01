@@ -19,21 +19,13 @@
 
 package com.ofbizian.semat.fixture.dom;
 
-import java.util.Set;
-
-import com.ofbizian.semat.dom.domain.Alpha;
-import com.ofbizian.semat.dom.domain.Concern;
 import com.ofbizian.semat.dom.domain.Project;
 import com.ofbizian.semat.dom.domain.ProjectMenu;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 public class ProjectCreate extends FixtureScript {
-
-    //region > name (input)
     private String name;
     private String code;
-    private Set<Alpha> alphas;
-    private Set<Concern> concerns;
 
     public String getName() {
         return name;
@@ -51,46 +43,18 @@ public class ProjectCreate extends FixtureScript {
         this.code = code;
     }
 
-    public Set<Alpha> getAlphas() {
-        return alphas;
-    }
-
-    public void setAlphas(Set<Alpha> alphas) {
-        this.alphas = alphas;
-    }
-
-
-    public Set<Concern> getConcerns() {
-        return concerns;
-    }
-
-    public void setConcerns(Set<Concern> concerns) {
-        this.concerns = concerns;
-    }
-
-    //region > nurse (output)
     private Project project;
 
-    /**
-     * The created simple object (output).
-     * @return
-     */
     public Project getProject() {
         return project;
     }
-    //endregion
 
     @Override
     protected void execute(final ExecutionContext ec) {
-
         String name = checkParam("name", ec, String.class);
         String code = checkParam("code", ec, String.class);
-        Set<Alpha> alphas = checkParam("alphas", ec, Set.class);
 
         this.project = wrap(menu).create(name, code);
-        this.project.setAlphas(alphas);
-
-        // also make available to UI
         ec.addResult(this, project);
     }
 

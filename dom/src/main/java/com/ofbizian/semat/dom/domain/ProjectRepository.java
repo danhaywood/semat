@@ -57,35 +57,45 @@ public class ProjectRepository {
 
         serviceRegistry.injectServicesInto(object);
         object.init();
+        createAlphas(object);
         repositoryService.persist(object);
         return object;
+    }
+
+    private void createAlphas(Project object) {
+        Opportunity opportunity = new Opportunity();
+        Stakeholders stakeholders = new Stakeholders();
+        Requirements requirements = new Requirements();
+        SoftwareSystem softwareSystem = new SoftwareSystem();
+        Team team = new Team();
+        Work work = new Work();
+        WayOfWorking wayOfWorking = new WayOfWorking();
+
+        createAlpha(opportunity);
+        createAlpha(stakeholders);
+        createAlpha(requirements);
+        createAlpha(softwareSystem);
+        createAlpha(team);
+        createAlpha(work);
+        createAlpha(wayOfWorking);
+
+        object.setOpportunity(opportunity);
+        object.setStakeholders(stakeholders);
+        object.setRequirements(requirements);
+        object.setSoftwareSystem(softwareSystem);
+        object.setTeam(team);
+        object.setWork(work);
+        object.setWayOfWorking(wayOfWorking);
+    }
+
+    private void createAlpha(Alpha object) {
+        serviceRegistry.injectServicesInto(object);
+        object.init();
+        repositoryService.persist(object);
     }
 
     public List<Alpha> listAlphas() {
         return repositoryService.allInstances(Alpha.class);
-    }
-
-    public Alpha createAlpha(final String name, Concern concern) {
-        Alpha object = new Alpha();
-        object.setName(name);
-        object.setConcern(concern);
-        serviceRegistry.injectServicesInto(object);
-        object.init();
-        repositoryService.persist(object);
-        return object;
-    }
-
-    public Concern createConcern(final String name) {
-        Concern object = new Concern();
-        object.setName(name);
-        serviceRegistry.injectServicesInto(object);
-        object.init();
-        repositoryService.persist(object);
-        return object;
-    }
-
-    public List<Concern> listConcern() {
-        return repositoryService.allInstances(Concern.class);
     }
 
     public State createState(final String name, String description) {
@@ -116,6 +126,35 @@ public class ProjectRepository {
 
     public List<AlphaState> listAlphaState() {
         return repositoryService.allInstances(AlphaState.class);
+    }
+
+    public Item createItem(String description) {
+        Item object = new Item();
+        object.setDescription(description);
+        serviceRegistry.injectServicesInto(object);
+        object.init();
+        repositoryService.persist(object);
+        return object;
+    }
+
+    public List<Item> listItems() {
+        return repositoryService.allInstances(Item.class);
+    }
+
+    public Checklist createChecklist(State state, Item item, boolean achieved, int sequence) {
+        Checklist object = new Checklist();
+        object.setState(state);
+        object.setItem(item);
+        object.setAchieved(achieved);
+        object.setSequence(sequence);
+        serviceRegistry.injectServicesInto(object);
+        object.init();
+        repositoryService.persist(object);
+        return object;
+    }
+
+    public List<Checklist> listChecklists() {
+        return repositoryService.allInstances(Checklist.class);
     }
 
 }

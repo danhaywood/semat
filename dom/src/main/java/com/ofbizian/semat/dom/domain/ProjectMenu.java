@@ -70,23 +70,6 @@ public class ProjectMenu {
         return projectRepository.create(name, code);
     }
 
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
-    @MemberOrder(sequence = "4")
-    public List<Alpha> listAlphas() {
-        return projectRepository.listAlphas();
-    }
-
-    @Action(domainEvent = CreateDomainEvent.class, semantics = SemanticsOf.NON_IDEMPOTENT)
-    @MemberOrder(sequence = "5")
-    public Alpha createAlpha(
-            @ParameterLayout(named="Name")
-            final String name,
-            @ParameterLayout(named="Concern")
-            final Concern concern) {
-        return projectRepository.createAlpha(name, concern);
-    }
-
     @javax.inject.Inject
     ProjectRepository projectRepository;
 

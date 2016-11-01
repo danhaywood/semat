@@ -16,24 +16,14 @@
 
 package com.ofbizian.semat.dom.domain;
 
-import javax.jdo.annotations.IdentityType;
+public enum Concern {
 
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import org.apache.isis.applib.annotation.DomainObject;
-import org.apache.isis.applib.annotation.Title;
+    CUSTOMER,
+    SOLUTION,
+    ENDEAVOR;
 
-@javax.jdo.annotations.PersistenceCapable(
-        identityType= IdentityType.DATASTORE,
-        schema = "simple"
-)
-@DomainObject
-@XStreamAlias("Concern")
-public class Concern extends AbstractPersistable {
-
-    @javax.jdo.annotations.Column(allowsNull = "false")
     private String name;
 
-    @Title
     public String getName() {
         return name;
     }
