@@ -9,9 +9,10 @@
     mvn jetty:run
 
 ### Login
+    http://localhost:8080/
 
-    user:user - default demo tenanted user
-    admin:admin - admin user with full access
+    user:user - default demo tenanted user with example projects
+    admin:admin - admin user with full access but no tenancy
 
 ### Further Reading
 The project is based on Apache ISIS.

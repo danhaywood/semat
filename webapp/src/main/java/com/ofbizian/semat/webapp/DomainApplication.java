@@ -85,6 +85,13 @@ public class DomainApplication extends IsisWicketApplication {
                 bind(String.class).annotatedWith(Names.named("aboutMessage")).toInstance("SEMAT");
                 bind(InputStream.class).annotatedWith(Names.named("metaInfManifest")).toProvider(
                         Providers.of(getServletContext().getResourceAsStream("/META-INF/MANIFEST.MF")));
+
+
+                bind(String.class).annotatedWith(Names.named("brandLogoHeader"))
+                        .toInstance("/about/images/semat-logo-small.png");
+                bind(String.class).annotatedWith(Names.named("brandLogoSignin"))
+                        .toInstance("/about/images/semat-logo.png");
+
                 // if uncommented, then overrides isis.appManifest in config file.
                 // bind(AppManifest.class).toInstance(new DomainAppAppManifest());
             }

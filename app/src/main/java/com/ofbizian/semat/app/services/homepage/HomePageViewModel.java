@@ -30,7 +30,7 @@ import org.apache.isis.applib.services.wrapper.WrapperFactory;
 public class HomePageViewModel {
 
     public TranslatableString title() {
-        return TranslatableString.tr("{num} projects", "num", getProjects().size());
+        return TranslatableString.tr("Home Page");
     }
 
     @org.apache.isis.applib.annotation.HomePage
