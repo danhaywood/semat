@@ -16,6 +16,7 @@
 
 package com.ofbizian.semat.dom.domain;
 
+import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
@@ -77,6 +78,24 @@ public class AlphaState extends AbstractPersistable {
     public void setSequence(int sequence) {
         this.sequence = sequence;
     }
+
+    //TOOD use mixins
+    public String getProgress() {
+        final SortedSet<Checklist> checklists = getState().getChecklists();
+        if (checklists == null) {
+            return "(0/0)";
+        }
+
+        int total = checklists.size();
+        int achieved = 0;
+        for (Checklist checklist : checklists) {
+            if (checklist.isAchieved()) {
+                achieved++;
+            }
+        }
+        return "(" + achieved + "/" + total + ")";
+    }
+
 
     @Override
     public int compareTo(AbstractPersistable other) {

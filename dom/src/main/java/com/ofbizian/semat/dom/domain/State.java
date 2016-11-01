@@ -42,6 +42,22 @@ public class State extends AbstractPersistable {
 
     private SortedSet<Checklist> checklists;
 
+    public String getProgress() {
+        if (checklists == null) {
+            return "(0/0)";
+        }
+
+        int total = checklists.size();
+        int achieved = 0;
+        for (Checklist checklist : checklists) {
+            if (checklist.isAchieved()) {
+                achieved++;
+            }
+        }
+        return "(" + achieved + "/" + total + ")";
+    }
+
+
     @CollectionLayout(defaultView = "table")
     @javax.jdo.annotations.Persistent(mappedBy = "state", defaultFetchGroup = "true")
     public SortedSet<Checklist> getChecklists() {

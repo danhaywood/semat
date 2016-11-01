@@ -343,30 +343,30 @@ public class RecreateProjects extends AbstractFixtureScript {
         createChecklist(ec, conceived, 4, "There is a clear opportunity for the new system to address.");
 
         createChecklist(ec, bounded, 1, "The stakeholders involved in developing the new system are identified.");
-        createChecklist(ec, conceived, 2, "The stakeholders agree on the purpose of the new system.");
-        createChecklist(ec, conceived, 3, "It is clear what success is for the new system.");
-        createChecklist(ec, conceived, 4, "The stakeholders have a shared understanding of the extent of the proposed solution.");
-        createChecklist(ec, conceived, 5, "The way the requirements will be described is agreed upon.");
-        createChecklist(ec, conceived, 6, "The mechanisms for managing the requirements are in place.");
-        createChecklist(ec, conceived, 7, "The prioritization scheme is clear.");
-        createChecklist(ec, conceived, 8, "Constraints are identified and considered.");
-        createChecklist(ec, conceived, 9, "Assumptions are clearly stated.");
+        createChecklist(ec, bounded, 2, "The stakeholders agree on the purpose of the new system.");
+        createChecklist(ec, bounded, 3, "It is clear what success is for the new system.");
+        createChecklist(ec, bounded, 4, "The stakeholders have a shared understanding of the extent of the proposed solution.");
+        createChecklist(ec, bounded, 5, "The way the requirements will be described is agreed upon.");
+        createChecklist(ec, bounded, 6, "The mechanisms for managing the requirements are in place.");
+        createChecklist(ec, bounded, 7, "The prioritization scheme is clear.");
+        createChecklist(ec, bounded, 8, "Constraints are identified and considered.");
+        createChecklist(ec, bounded, 9, "Assumptions are clearly stated.");
 
         createChecklist(ec, coherent, 1, "The requirements are captured and shared with the team and the stakeholders.");
-        createChecklist(ec, conceived, 2, "The origin of the requirements is clear.");
-        createChecklist(ec, conceived, 3, "The rationale behind the requirements is clear.");
-        createChecklist(ec, conceived, 4, "Conflicting requirements are identified and attended to.");
-        createChecklist(ec, conceived, 5, "The requirements communicate the essential characteristics of the system to be delivered.");
-        createChecklist(ec, conceived, 6, "The most important usage scenarios for the system can be explained.");
-        createChecklist(ec, conceived, 7, "The priority of the requirements is clear.");
-        createChecklist(ec, conceived, 8, "The impact of implementing the requirements is understood.");
-        createChecklist(ec, conceived, 9, "The team understands what has to be delivered and agrees to deliver it.");
+        createChecklist(ec, coherent, 2, "The origin of the requirements is clear.");
+        createChecklist(ec, coherent, 3, "The rationale behind the requirements is clear.");
+        createChecklist(ec, coherent, 4, "Conflicting requirements are identified and attended to.");
+        createChecklist(ec, coherent, 5, "The requirements communicate the essential characteristics of the system to be delivered.");
+        createChecklist(ec, coherent, 6, "The most important usage scenarios for the system can be explained.");
+        createChecklist(ec, coherent, 7, "The priority of the requirements is clear.");
+        createChecklist(ec, coherent, 8, "The impact of implementing the requirements is understood.");
+        createChecklist(ec, coherent, 9, "The team understands what has to be delivered and agrees to deliver it.");
 
         createChecklist(ec, acceptable, 1, "The stakeholders accept that the requirements describe an acceptable solution.");
-        createChecklist(ec, conceived, 2, "The rate of change to the agreed requirements is relatively low and under control.");
-        createChecklist(ec, conceived, 3, "The value provided by implementing the requirements is clear.");
-        createChecklist(ec, conceived, 4, "The parts of the opportunity satisfied by the requirements are clear.");
-        createChecklist(ec, conceived, 5, "The requirements are testable.");
+        createChecklist(ec, acceptable, 2, "The rate of change to the agreed requirements is relatively low and under control.");
+        createChecklist(ec, acceptable, 3, "The value provided by implementing the requirements is clear.");
+        createChecklist(ec, acceptable, 4, "The parts of the opportunity satisfied by the requirements are clear.");
+        createChecklist(ec, acceptable, 5, "The requirements are testable.");
 
         createChecklist(ec, addressed, 1, "Enough of the requirements are addressed for the resulting system to be acceptable to the stakeholders.");
         createChecklist(ec, addressed, 2, "The stakeholders accept the requirements as accurately reflecting what the system does and does not do.");
