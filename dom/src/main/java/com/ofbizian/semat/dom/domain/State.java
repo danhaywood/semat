@@ -42,7 +42,7 @@ public class State extends AbstractPersistable {
 
     private SortedSet<Checklist> checklists;
 
-    public String getProgress() {
+    public String getSummary() {
         if (checklists == null) {
             return "(0/0)";
         }

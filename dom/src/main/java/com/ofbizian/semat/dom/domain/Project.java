@@ -16,16 +16,20 @@
 
 package com.ofbizian.semat.dom.domain;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.TreeSet;
+import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
-import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.BookmarkPolicy;
 import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.DomainObjectLayout;
+import org.apache.isis.applib.annotation.MemberOrder;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.SemanticsOf;
 import org.apache.isis.applib.annotation.Where;
 
 @javax.jdo.annotations.Queries({
@@ -45,12 +49,10 @@ public class Project extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private String code;
 
-    @PropertyLayout(describedAs = "Unique name for this property")
     @javax.jdo.annotations.Column(allowsNull = "false")
     private String name;
 
     @javax.jdo.annotations.Column(allowsNull = "true")
-    @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
     private String description;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
@@ -74,58 +76,7 @@ public class Project extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private WayOfWorking wayOfWorking;
 
-//    @javax.jdo.annotations.Persistent(table = "ProjectAlphas")
-//    @javax.jdo.annotations.Join()
-//    private Set<Alpha> alphas = new TreeSet<>();
-//
-//    public Set<Alpha> getAlphas() {
-//        return alphas;
-//    }
-//
-//    public void setAlphas(Set<Alpha> alphas) {
-//        this.alphas = alphas;
-//    }
-//
-//    @Action
-//    public Project addAlpha(Alpha alpha) {
-//        getAlphas().add(alpha);
-//        return this;
-//    }
-//
-//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
-//    public Project removeAlpha(Alpha alpha) {
-//        getAlphas().remove(alpha);
-//        return this;
-//    }
-//
-//    @CollectionLayout(defaultView = "table", named = "Alpha States")
-//    public Set<ProjectStateView> getAlphaStates() {
-//        Set<ProjectStateView> projectStateViews = new LinkedHashSet<>();
-//        final Set<Alpha> alphas = getAlphas();
-//        for (Alpha alpha : alphas) {
-//            ProjectStateView view = new ProjectStateView();
-//            view.setAlpha(alpha);
-//            view.setConcern(alpha.getConcern().getName());
-//
-//            final SortedSet<AlphaState> alphaStates = alpha.getAlphaStates();
-//            List<AlphaState> list = new ArrayList(alphaStates);
-//            Collections.sort(list, Collections.reverseOrder());
-//            Set<AlphaState> resultSet = new LinkedHashSet(list);
-//            State lastState = null;
-//
-//            for (AlphaState alphaState : resultSet) {
-//                lastState = alphaState.getState();
-//                if (alphaState.isAchieved()) {
-//                    view.setAchieved(alphaState.isAchieved());
-//                    break;
-//                }
-//            }
-//            view.setState(lastState);
-//            projectStateViews.add(view);
-//        }
-//        return projectStateViews;
-//    }
-
+    @MemberOrder(sequence = "1")
     public String getCode() {
         return code;
     }
@@ -134,6 +85,7 @@ public class Project extends AbstractPersistable {
         this.code = code;
     }
 
+    @MemberOrder(sequence = "2")
     public String getName() {
         return name;
     }
@@ -142,6 +94,8 @@ public class Project extends AbstractPersistable {
         this.name = name;
     }
 
+    @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
+    @MemberOrder(sequence = "3")
     public String getDescription() {
         return description;
     }
@@ -150,6 +104,7 @@ public class Project extends AbstractPersistable {
         this.description = description;
     }
 
+    @Programmatic
     public Opportunity getOpportunity() {
         return opportunity;
     }
@@ -158,6 +113,7 @@ public class Project extends AbstractPersistable {
         this.opportunity = opportunity;
     }
 
+    @Programmatic
     public Stakeholders getStakeholders() {
         return stakeholders;
     }
@@ -166,6 +122,7 @@ public class Project extends AbstractPersistable {
         this.stakeholders = stakeholders;
     }
 
+    @Programmatic
     public Requirements getRequirements() {
         return requirements;
     }
@@ -174,6 +131,7 @@ public class Project extends AbstractPersistable {
         this.requirements = requirements;
     }
 
+    @Programmatic
     public SoftwareSystem getSoftwareSystem() {
         return softwareSystem;
     }
@@ -182,6 +140,7 @@ public class Project extends AbstractPersistable {
         this.softwareSystem = softwareSystem;
     }
 
+    @Programmatic
     public Work getWork() {
         return work;
     }
@@ -190,6 +149,7 @@ public class Project extends AbstractPersistable {
         this.work = work;
     }
 
+    @Programmatic
     public Team getTeam() {
         return team;
     }
@@ -198,6 +158,7 @@ public class Project extends AbstractPersistable {
         this.team = team;
     }
 
+    @Programmatic
     public WayOfWorking getWayOfWorking() {
         return wayOfWorking;
     }
@@ -214,6 +175,7 @@ public class Project extends AbstractPersistable {
     public Set<AlphaState> getOpportunityAlphaStates() {
         return opportunity.getAlphaStates();
     }
+
     @CollectionLayout(named="Stakeholders")
     public Set<AlphaState> getStakeholdersAlphaStates() {
         return stakeholders.getAlphaStates();
@@ -242,6 +204,49 @@ public class Project extends AbstractPersistable {
     @CollectionLayout(named="Way of Working")
     public Set<AlphaState> getWayOfWorkingAlphaStates() {
         return wayOfWorking.getAlphaStates();
+    }
+
+    public String getOpportunityStatus() {
+        return getAlphaStateSummary(opportunity.getAlphaStates());
+    }
+
+    public String getStakeholdersStatus() {
+        return getAlphaStateSummary(stakeholders.getAlphaStates());
+    }
+
+    public String getRequirementsStatus() {
+        return getAlphaStateSummary(requirements.getAlphaStates());
+    }
+
+    public String getSoftwareSystemStatus() {
+        return getAlphaStateSummary(softwareSystem.getAlphaStates());
+    }
+
+    public String getWorkStatus() {
+        return getAlphaStateSummary(work.getAlphaStates());
+    }
+
+    public String getTeamStatus() {
+        return getAlphaStateSummary(team.getAlphaStates());
+    }
+
+    public String getWayOfWorkingStatus() {
+        return getAlphaStateSummary(wayOfWorking.getAlphaStates());
+    }
+
+    private String getAlphaStateSummary(SortedSet<AlphaState> alphaStates) {
+        List<AlphaState> list = new ArrayList(alphaStates);
+        Collections.sort(list, Collections.reverseOrder());
+        Set<AlphaState> resultSet = new LinkedHashSet(list);
+        String lastState = "none";
+
+        for (AlphaState alphaState : resultSet) {
+            if (alphaState.isAchieved()) {
+                lastState = alphaState.getState().getName();
+                break;
+            }
+        }
+        return lastState;
     }
 
 }

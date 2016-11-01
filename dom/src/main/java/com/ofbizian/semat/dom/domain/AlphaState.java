@@ -20,6 +20,7 @@ import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
+import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Title;
@@ -54,6 +55,7 @@ public class AlphaState extends AbstractPersistable {
     }
 
     @Title(sequence = "2")
+    @MemberOrder(sequence = "1")
     public State getState() {
         return state;
     }
@@ -62,6 +64,7 @@ public class AlphaState extends AbstractPersistable {
         this.state = state;
     }
 
+    @MemberOrder(sequence = "2")
     public boolean isAchieved() {
         return achieved;
     }
@@ -80,7 +83,8 @@ public class AlphaState extends AbstractPersistable {
     }
 
     //TOOD use mixins
-    public String getProgress() {
+    @MemberOrder(sequence = "3")
+    public String getSummary() {
         final SortedSet<Checklist> checklists = getState().getChecklists();
         if (checklists == null) {
             return "(0/0)";

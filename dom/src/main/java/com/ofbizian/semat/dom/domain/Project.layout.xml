@@ -34,20 +34,25 @@
                         </bs3:col>
                     </bs3:row>
                 </bs3:tab>
+                <bs3:tab name="Alpha Status">
+                    <bs3:row>
+                        <bs3:col span="12">
+                            <c:fieldSet name="Alpha Status">
+                                <c:property id="opportunityStatus"/>
+                                <c:property id="stakeholdersStatus"/>
+                                <c:property id="requirementsStatus"/>
+                                <c:property id="softwareSystemStatus"/>
+                                <c:property id="workStatus"/>
+                                <c:property id="teamStatus"/>
+                                <c:property id="wayOfWorkingStatus"/>
+                            </c:fieldSet>
+                        </bs3:col>
+                    </bs3:row>
+                </bs3:tab>
                 <bs3:tab name="Metadata">
                     <bs3:row>
                         <bs3:col span="12">
                             <c:fieldSet name="Metadata"/>
-                        </bs3:col>
-                    </bs3:row>
-                </bs3:tab>
-                <bs3:tab name="Alphas">
-                    <bs3:row>
-                        <bs3:col span="12">
-                            <c:collection defaultView="table" id="alphas">
-                                <c:action id="addAlpha"/>
-                                <c:action id="removeAlpha"/>
-                            </c:collection>
                         </bs3:col>
                     </bs3:row>
                 </bs3:tab>
