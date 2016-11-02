@@ -76,7 +76,6 @@ public class Project extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private WayOfWorking wayOfWorking;
 
-    @MemberOrder(sequence = "1")
     public String getCode() {
         return code;
     }
@@ -85,7 +84,6 @@ public class Project extends AbstractPersistable {
         this.code = code;
     }
 
-    @MemberOrder(sequence = "2")
     public String getName() {
         return name;
     }
@@ -95,7 +93,6 @@ public class Project extends AbstractPersistable {
     }
 
     @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
-    @MemberOrder(sequence = "3")
     public String getDescription() {
         return description;
     }

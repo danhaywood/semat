@@ -21,6 +21,8 @@ package com.ofbizian.semat.fixture.scenarios;
 
 import com.google.common.collect.Lists;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
+import org.apache.isis.applib.services.layout.LayoutServiceMenu;
+import org.apache.isis.core.metamodel.services.jdosupport.Persistable_datanucleusIdLong;
 import org.isisaddons.module.security.dom.permission.ApplicationPermissionMode;
 import org.isisaddons.module.security.dom.permission.ApplicationPermissionRule;
 import org.isisaddons.module.security.dom.user.AccountType;
@@ -48,6 +50,23 @@ public class UserFixture extends FixtureScript {
 
             }
         });
+
+        ec.executeChild(this, new AbstractRoleAndPermissionsFixtureScript("metadata-menu-user", "User access to metadata menu"){
+            @Override
+            protected void execute(ExecutionContext executionContext) {
+                newPackagePermissions(ApplicationPermissionRule.ALLOW, ApplicationPermissionMode.CHANGING, LayoutServiceMenu.class.getPackage().getName());
+            }
+        });
+
+        ec.executeChild(this, new AbstractRoleAndPermissionsFixtureScript("persistable-mixins-user", "User access to persistable metadata"){
+            @Override
+            protected void execute(ExecutionContext executionContext) {
+                newPackagePermissions(ApplicationPermissionRule.ALLOW, ApplicationPermissionMode.CHANGING, Persistable_datanucleusIdLong.class.getPackage().getName());
+            }
+        });
+
+
+
 
         ec.executeChild(this, new AbstractRoleAndPermissionsFixtureScript("todoapp-sessionlogger-admin", "Admin access to session logger module"){
             @Override
@@ -80,8 +99,8 @@ public class UserFixture extends FixtureScript {
 
 
         ec.executeChild(this, new AbstractUserAndRolesFixtureScript("test", "test", AccountType.LOCAL, Lists.newArrayList("easter2017","christmas2017","isis-module-security-regular-user")){});
-        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("user", "user", null, "/", AccountType.LOCAL, Lists.newArrayList("easter2017","christmas2017","isis-module-security-regular-user")){});
-        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("admin", "admin", null, "/bg", AccountType.LOCAL, Lists.newArrayList("easter2017", "summer2017","isis-module-security-admin", "todoapp-auditing-admin", "todoapp-sessionlogger-admin", "todoapp-settings-admin", "todoapp-command-admin")){});
+        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("user", "user", null, "/", AccountType.LOCAL, Lists.newArrayList("easter2017","christmas2017","isis-module-security-regular-user", "persistable-mixins-user")){});
+        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("admin", "admin", null, "/bg", AccountType.LOCAL, Lists.newArrayList("easter2017", "summer2017","isis-module-security-admin", "todoapp-auditing-admin", "metadata-menu-user", "persistable-mixins-user", "todoapp-sessionlogger-admin", "todoapp-settings-admin", "todoapp-command-admin")){});
     }
 
     private static class RoleAndPermissionsFixtureScript extends AbstractRoleAndPermissionsFixtureScript {

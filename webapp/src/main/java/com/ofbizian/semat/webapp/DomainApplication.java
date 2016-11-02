@@ -87,8 +87,8 @@ public class DomainApplication extends IsisWicketApplication {
                         Providers.of(getServletContext().getResourceAsStream("/META-INF/MANIFEST.MF")));
 
 
-                bind(String.class).annotatedWith(Names.named("brandLogoHeader"))
-                        .toInstance("/about/images/semat-logo-small.png");
+//                bind(String.class).annotatedWith(Names.named("brandLogoHeader"))
+//                        .toInstance("/about/images/semat-logo-small.png");
                 bind(String.class).annotatedWith(Names.named("brandLogoSignin"))
                         .toInstance("/about/images/semat-logo.png");
 

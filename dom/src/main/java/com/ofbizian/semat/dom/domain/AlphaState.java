@@ -16,15 +16,12 @@
 
 package com.ofbizian.semat.dom.domain;
 
+import java.util.List;
 import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Programmatic;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Title;
-import org.apache.isis.applib.annotation.Where;
+import org.apache.isis.applib.annotation.*;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
@@ -65,12 +62,37 @@ public class AlphaState extends AbstractPersistable {
     }
 
     @MemberOrder(sequence = "2")
+    @Property(
+            editing = Editing.DISABLED,
+            editingDisabledReason = "Use actions to change"
+    )
     public boolean isAchieved() {
         return achieved;
     }
 
+    @Programmatic
     public void setAchieved(boolean achieved) {
         this.achieved = achieved;
+    }
+
+    @Action(invokeOn = InvokeOn.OBJECT_AND_COLLECTION)
+    public AlphaState achieve() {
+        setAchieved(true);
+        return this;
+    }
+
+    public String disableAchieve() {
+        return isAchieved() ? "Already achieved" : null;
+    }
+
+    @Action(invokeOn = InvokeOn.OBJECT_AND_COLLECTION)
+    public AlphaState unachieve() {
+        setAchieved(false);
+        return this;
+    }
+
+    public String disableUnachieve() {
+        return isAchieved() ? null : "Already unachieved";
     }
 
     @Programmatic

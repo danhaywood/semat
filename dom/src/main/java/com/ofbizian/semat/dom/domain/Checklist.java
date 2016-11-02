@@ -19,7 +19,12 @@ package com.ofbizian.semat.dom.domain;
 import javax.jdo.annotations.IdentityType;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
+import org.apache.isis.applib.annotation.Action;
+import org.apache.isis.applib.annotation.Editing;
+import org.apache.isis.applib.annotation.InvokeOn;
+import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Programmatic;
+import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Title;
 import org.apache.isis.applib.annotation.Where;
@@ -40,6 +45,40 @@ public class Checklist extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private boolean achieved;
 
+    @MemberOrder(sequence = "2")
+    @Property(
+            editing = Editing.DISABLED,
+            editingDisabledReason = "Use actions to change"
+    )
+    public boolean isAchieved() {
+        return achieved;
+    }
+
+    @Programmatic
+    public void setAchieved(boolean achieved) {
+        this.achieved = achieved;
+    }
+
+    @Action(invokeOn = InvokeOn.OBJECT_AND_COLLECTION)
+    public Checklist achieve() {
+        setAchieved(true);
+        return this;
+    }
+
+    public String disableAchieve() {
+        return isAchieved() ? "Already achieved" : null;
+    }
+
+    @Action(invokeOn = InvokeOn.OBJECT_AND_COLLECTION)
+    public Checklist unachieve() {
+        setAchieved(false);
+        return this;
+    }
+
+    public String disableUnachieve() {
+        return isAchieved() ? null : "Already unachieved";
+    }
+
     @javax.jdo.annotations.Column(allowsNull = "false")
     private int sequence;
 
@@ -59,14 +98,6 @@ public class Checklist extends AbstractPersistable {
 
     public void setState(State state) {
         this.state = state;
-    }
-
-    public boolean isAchieved() {
-        return achieved;
-    }
-
-    public void setAchieved(boolean achieved) {
-        this.achieved = achieved;
     }
 
     @Programmatic
