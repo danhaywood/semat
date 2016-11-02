@@ -42,7 +42,7 @@ public class AlphaState extends AbstractPersistable {
     private int sequence;
 
     @Title(sequence = "1")
-    @PropertyLayout(hidden = Where.PARENTED_TABLES)
+    @PropertyLayout(hidden = Where.EVERYWHERE)
     public Alpha getAlpha() {
         return alpha;
     }

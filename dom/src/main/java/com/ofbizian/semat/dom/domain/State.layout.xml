@@ -41,7 +41,7 @@
                 <bs3:tab name="Metadata">
                     <bs3:row>
                         <bs3:col span="12">
-                            <c:fieldSet name="Metadata" id="metadata">
+                            <c:fieldSet name="Details" id="metadata">
                                 <c:property id="datanucleusIdLong"/>
                                 <c:property id="datanucleusVersionLong"/>
                                 <c:property id="datanucleusVersionTimestamp"/>

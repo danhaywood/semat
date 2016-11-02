@@ -33,9 +33,12 @@
                             <c:fieldSet name="Properties" unreferencedProperties="true">
                                 <c:property id="state"/>
                                 <c:property id="item"/>
-                                <c:property id="achieved"/>
-                                <c:action id="achieve" cssClassFa="fa-thumbs-up"/>
-                                <c:action id="unachieve" cssClassFa="fa-thumbs-down"/>
+                                <c:property id="achieved">
+                                    <c:action id="achieve" cssClassFa="fa-thumbs-up"/>
+                                    <c:action id="unachieve" cssClassFa="fa-thumbs-down"/>
+                                </c:property>
+                                <!--<c:action id="achieve" cssClassFa="fa-thumbs-up"/>-->
+                                <!--<c:action id="unachieve" cssClassFa="fa-thumbs-down"/>-->
                             </c:fieldSet>
                         </bs3:col>
                     </bs3:row>
@@ -43,7 +46,7 @@
                 <bs3:tab name="Metadata">
                     <bs3:row>
                         <bs3:col span="12">
-                            <c:fieldSet name="Metadata" id="metadata">
+                            <c:fieldSet name="Details" id="metadata">
                                 <c:property id="datanucleusIdLong"/>
                                 <c:property id="datanucleusVersionLong"/>
                                 <c:property id="datanucleusVersionTimestamp"/>
