@@ -58,13 +58,13 @@ public class ProjectRepository {
     }
 
     private void createAlphas(Project object) {
-        Opportunity opportunity = new Opportunity();
-        Stakeholders stakeholders = new Stakeholders();
-        Requirements requirements = new Requirements();
-        SoftwareSystem softwareSystem = new SoftwareSystem();
-        Team team = new Team();
-        Work work = new Work();
-        WayOfWorking wayOfWorking = new WayOfWorking();
+        Alpha opportunity = new Alpha("Opportunity", Concern.CUSTOMER);
+        Alpha stakeholders = new Alpha("Stakeholders", Concern.CUSTOMER);
+        Alpha requirements = new Alpha("Requirements", Concern.SOLUTION);
+        Alpha softwareSystem = new Alpha("Software System", Concern.SOLUTION);
+        Alpha team = new Alpha("Team", Concern.ENDEAVOR);
+        Alpha work = new Alpha("Work", Concern.ENDEAVOR);
+        Alpha wayOfWorking = new Alpha("Way Of Working", Concern.ENDEAVOR);
 
         createAlpha(opportunity);
         createAlpha(stakeholders);

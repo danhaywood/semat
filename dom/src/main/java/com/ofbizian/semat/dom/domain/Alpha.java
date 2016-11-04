@@ -14,6 +14,17 @@ import org.apache.isis.applib.annotation.DomainObject;
 public class Alpha extends AbstractPersistable {
 
     private SortedSet<AlphaState> alphaStates;
+    private Concern concern;
+    private String name;
+
+    public Alpha(String name, Concern concern) {
+        this.name = name;
+        this.concern = concern;
+    }
+
+    public Concern getConcern() {
+        return concern;
+    }
 
     @CollectionLayout(defaultView = "table")
     @javax.jdo.annotations.Persistent(mappedBy = "alpha", defaultFetchGroup = "true")
@@ -25,4 +36,7 @@ public class Alpha extends AbstractPersistable {
         this.alphaStates = alphaStates;
     }
 
+    public String iconName() {
+        return name;
+    }
 }

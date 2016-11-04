@@ -35,25 +35,25 @@ public class Project extends AbstractPersistable {
     private String description;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private Opportunity opportunity;
+    private Alpha opportunity;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private Stakeholders stakeholders;
+    private Alpha stakeholders;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private Requirements requirements;
+    private Alpha requirements;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private SoftwareSystem softwareSystem;
+    private Alpha softwareSystem;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private Work work;
+    private Alpha work;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private Team team;
+    private Alpha team;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private WayOfWorking wayOfWorking;
+    private Alpha wayOfWorking;
 
     @Property(editing = Editing.DISABLED, editingDisabledReason = "Use actions to change")
     public String getCode() {
@@ -84,65 +84,65 @@ public class Project extends AbstractPersistable {
     }
 
     @Programmatic
-    public Opportunity getOpportunity() {
+    public Alpha getOpportunity() {
         return opportunity;
     }
 
-    public void setOpportunity(Opportunity opportunity) {
+    public void setOpportunity(Alpha opportunity) {
         this.opportunity = opportunity;
     }
 
     @Programmatic
-    public Stakeholders getStakeholders() {
+    public Alpha getStakeholders() {
         return stakeholders;
     }
 
-    public void setStakeholders(Stakeholders stakeholders) {
+    public void setStakeholders(Alpha stakeholders) {
         this.stakeholders = stakeholders;
     }
 
     @Programmatic
-    public Requirements getRequirements() {
+    public Alpha getRequirements() {
         return requirements;
     }
 
-    public void setRequirements(Requirements requirements) {
+    public void setRequirements(Alpha requirements) {
         this.requirements = requirements;
     }
 
     @Programmatic
-    public SoftwareSystem getSoftwareSystem() {
+    public Alpha getSoftwareSystem() {
         return softwareSystem;
     }
 
-    public void setSoftwareSystem(SoftwareSystem softwareSystem) {
+    public void setSoftwareSystem(Alpha softwareSystem) {
         this.softwareSystem = softwareSystem;
     }
 
     @Programmatic
-    public Work getWork() {
+    public Alpha getWork() {
         return work;
     }
 
-    public void setWork(Work work) {
+    public void setWork(Alpha work) {
         this.work = work;
     }
 
     @Programmatic
-    public Team getTeam() {
+    public Alpha getTeam() {
         return team;
     }
 
-    public void setTeam(Team team) {
+    public void setTeam(Alpha team) {
         this.team = team;
     }
 
     @Programmatic
-    public WayOfWorking getWayOfWorking() {
+    public Alpha getWayOfWorking() {
         return wayOfWorking;
     }
 
-    public void setWayOfWorking(WayOfWorking wayOfWorking) {
+    public void setWayOfWorking(Alpha wayOfWorking) {
         this.wayOfWorking = wayOfWorking;
     }
 
