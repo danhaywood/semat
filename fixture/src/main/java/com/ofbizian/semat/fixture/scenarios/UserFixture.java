@@ -72,7 +72,7 @@ public class UserFixture extends FixtureScript {
             }
         });
 
-        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("user", "user", null, "/semat", AccountType.LOCAL, Lists.newArrayList("semat","isis-module-security-regular-user")){});
+        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("user", "user", null, "/semat", AccountType.LOCAL, Lists.newArrayList("semat","isis-module-security-regular-user", "persistable-mixins-user")){});
 
         ec.executeChild(this, new AbstractUserAndRolesFixtureScript("admin", "admin", null, "/", AccountType.LOCAL, Lists.newArrayList("semat","isis-module-security-admin", "todoapp-auditing-admin", "metadata-menu-user", "persistable-mixins-user", "todoapp-sessionlogger-admin", "todoapp-settings-admin", "todoapp-command-admin")){});
     }

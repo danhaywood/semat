@@ -33,7 +33,6 @@ public class AlphaState extends AbstractPersistable {
         this.alpha = alpha;
     }
 
-    @Title()
     @PropertyLayout(hidden = Where.EVERYWHERE)
     public State getState() {
         return state;
@@ -41,7 +40,7 @@ public class AlphaState extends AbstractPersistable {
 
     @PropertyLayout(hidden = Where.ALL_TABLES)
     public String getAlphaName() {
-        return alpha.toString();
+        return alpha.getName();
     }
 
     @MemberOrder(sequence = "1")
@@ -119,5 +118,9 @@ public class AlphaState extends AbstractPersistable {
                 .append(getSequence(), ((AlphaState) other).getSequence() )
                 .append(getClass().getName(), other.getClass().getName())
                 .toComparison();
+    }
+
+    public String title() {
+        return getAlpha().getName() + " " + state.getName();
     }
 }

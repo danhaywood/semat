@@ -147,7 +147,7 @@ public class Project extends AbstractPersistable {
     }
 
     public String title() {
-        return "[" + code + "] " + name;
+        return "Project: [" + code + "] " + name;
     }
 
     @CollectionLayout(named="Opportunity")

@@ -16,7 +16,6 @@ public class Item extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
     @PropertyLayout(multiLine=5)
-    @Title
     private String description;
 
     public String getDescription() {
@@ -26,4 +25,5 @@ public class Item extends AbstractPersistable {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

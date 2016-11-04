@@ -26,6 +26,10 @@ public class Alpha extends AbstractPersistable {
         return concern;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @CollectionLayout(defaultView = "table")
     @javax.jdo.annotations.Persistent(mappedBy = "alpha", defaultFetchGroup = "true")
     public SortedSet<AlphaState> getAlphaStates() {

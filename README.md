@@ -24,6 +24,7 @@
  - LDAP integration
  - Auditing
  - Session logging
+ - Internationalization
  - Custom Essence Alpha states
  - Custom Essence Checklist items
 
