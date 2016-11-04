@@ -29,7 +29,7 @@ public abstract class AbstractFixtureScript extends FixtureScript {
     @Override
     protected final void execute(final ExecutionContext ec) {
 
-        sudoService.sudo("isis-module-security-admin", new Runnable() {
+        sudoService.sudo("user", new Runnable() {
             @Override
             public void run() {
                 doExecute(ec);

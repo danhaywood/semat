@@ -39,14 +39,12 @@ public class UserFixture extends FixtureScript {
     @Override
     protected void execute(final ExecutionContext ec) {
 
-        ec.executeChild(this, new RoleAndPermissionsFixtureScript("easter2017", "Easter 2017 Concert"));
-        ec.executeChild(this, new RoleAndPermissionsFixtureScript("summer2017", "Summer 2017 Concert"));
-        ec.executeChild(this, new RoleAndPermissionsFixtureScript("christmas2017", "Christmas 2017 Concert"));
+        ec.executeChild(this, new SematRoleAndPermissionsFixtureScript("semat", "Semat Application User Role"));
 
         ec.executeChild(this, new AbstractTenancyFixtureScript(){
             @Override
             protected void execute(ExecutionContext executionContext) {
-                create("bulgaria", "/bg", null, executionContext);
+                create("Semat Demo", "/semat", null, executionContext);
 
             }
         });
@@ -64,9 +62,6 @@ public class UserFixture extends FixtureScript {
                 newPackagePermissions(ApplicationPermissionRule.ALLOW, ApplicationPermissionMode.CHANGING, Persistable_datanucleusIdLong.class.getPackage().getName());
             }
         });
-
-
-
 
         ec.executeChild(this, new AbstractRoleAndPermissionsFixtureScript("todoapp-sessionlogger-admin", "Admin access to session logger module"){
             @Override
@@ -96,21 +91,19 @@ public class UserFixture extends FixtureScript {
             }
         });
 
+        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("user", "user", null, "/semat", AccountType.LOCAL, Lists.newArrayList("semat","isis-module-security-regular-user")){});
 
-
-        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("test", "test", AccountType.LOCAL, Lists.newArrayList("easter2017","christmas2017","isis-module-security-regular-user")){});
-        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("user", "user", null, "/", AccountType.LOCAL, Lists.newArrayList("easter2017","christmas2017","isis-module-security-regular-user", "persistable-mixins-user")){});
-        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("admin", "admin", null, "/bg", AccountType.LOCAL, Lists.newArrayList("easter2017", "summer2017","isis-module-security-admin", "todoapp-auditing-admin", "metadata-menu-user", "persistable-mixins-user", "todoapp-sessionlogger-admin", "todoapp-settings-admin", "todoapp-command-admin")){});
+        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("admin", "admin", null, "/", AccountType.LOCAL, Lists.newArrayList("semat","isis-module-security-admin", "todoapp-auditing-admin", "metadata-menu-user", "persistable-mixins-user", "todoapp-sessionlogger-admin", "todoapp-settings-admin", "todoapp-command-admin")){});
     }
 
-    private static class RoleAndPermissionsFixtureScript extends AbstractRoleAndPermissionsFixtureScript {
-        public RoleAndPermissionsFixtureScript(String roleName, String roleDescriptionIfAny) {
+    private static class SematRoleAndPermissionsFixtureScript extends AbstractRoleAndPermissionsFixtureScript {
+        public SematRoleAndPermissionsFixtureScript(String roleName, String roleDescriptionIfAny) {
             super(roleName, roleDescriptionIfAny);
         }
 
         @Override
         protected void execute(ExecutionContext ec) {
-            newPackagePermissions(ApplicationPermissionRule.ALLOW, ApplicationPermissionMode.CHANGING, "com.ofbizian");
+            newPackagePermissions(ApplicationPermissionRule.ALLOW, ApplicationPermissionMode.CHANGING, "com.ofbizian.semat");
         }
     }
 }

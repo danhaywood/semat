@@ -34,7 +34,7 @@
                                 <c:property id="alphaName"/>
                                 <c:property id="stateName"/>
                                 <c:property id="stateDescription"/>
-                                <c:property id="summary"/>
+                                <c:property id="checklistSummary"/>
                                 <c:property id="achieved">
                                     <c:action id="achieve" cssClassFa="fa-thumbs-up"/>
                                     <c:action id="unachieve" cssClassFa="fa-thumbs-down"/>

@@ -43,6 +43,7 @@ public class ProjectMenu {
             @ParameterLayout(named="Name")
             final String name,
             @ParameterLayout(named="Description")
+            @Parameter(optionality = Optionality.OPTIONAL)
             final String descriptions) {
         return projectRepository.create(code, name, descriptions);
     }

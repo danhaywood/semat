@@ -71,30 +71,30 @@ public class Project extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private WayOfWorking wayOfWorking;
 
+    @Property(editing = Editing.DISABLED, editingDisabledReason = "Use actions to change")
     public String getCode() {
         return code;
     }
 
-    @Programmatic
     public void setCode(String code) {
         this.code = code;
     }
 
+    @Property(editing = Editing.DISABLED, editingDisabledReason = "Use actions to change")
     public String getName() {
         return name;
     }
 
-    @Programmatic
     public void setName(String name) {
         this.name = name;
     }
 
+    @Property(editing = Editing.DISABLED, editingDisabledReason = "Use actions to change")
     @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
     public String getDescription() {
         return description;
     }
 
-    @Programmatic
     public void setDescription(String description) {
         this.description = description;
     }
@@ -251,7 +251,7 @@ public class Project extends AbstractPersistable {
             final String code,
             @ParameterLayout(named="Name")
             final String name,
-            @ParameterLayout(named="Description")
+            @ParameterLayout(named="Description", multiLine=5)
             @Parameter(optionality = Optionality.OPTIONAL)
             final String description) {
         setCode(code);
@@ -280,8 +280,6 @@ public class Project extends AbstractPersistable {
 
     @javax.inject.Inject
     RepositoryService repositoryService;
-
-
 
     @javax.inject.Inject
     ProjectRepository projectRepository;

@@ -82,6 +82,7 @@ public class Checklist extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private int sequence;
 
+    @Title
     @PropertyLayout(named="Checklist Item")
     public String getItemName() {
         return item.getDescription();

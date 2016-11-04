@@ -33,7 +33,7 @@
                             <c:fieldSet name="Properties" unreferencedProperties="true">
                                 <c:property id="name"/>
                                 <c:property id="description"/>
-                                <c:property id="summary"/>
+                                <c:property id="checklistSummary"/>
                             </c:fieldSet>
                         </bs3:col>
                     </bs3:row>

@@ -120,22 +120,9 @@ public class AlphaState extends AbstractPersistable {
         this.sequence = sequence;
     }
 
-    //TOOD use mixins
     @MemberOrder(sequence = "3")
-    public String getSummary() {
-        final SortedSet<Checklist> checklists = getState().getChecklists();
-        if (checklists == null) {
-            return "(0/0)";
-        }
-
-        int total = checklists.size();
-        int achieved = 0;
-        for (Checklist checklist : checklists) {
-            if (checklist.isAchieved()) {
-                achieved++;
-            }
-        }
-        return "(" + achieved + "/" + total + ")";
+    public String getChecklistSummary() {
+       return getState().getChecklistSummary();
     }
 
     @CollectionLayout(defaultView = "table")
