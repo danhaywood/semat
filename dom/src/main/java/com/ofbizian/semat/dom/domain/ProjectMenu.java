@@ -20,15 +20,7 @@ package com.ofbizian.semat.dom.domain;
 
 import java.util.List;
 
-import org.apache.isis.applib.annotation.Action;
-import org.apache.isis.applib.annotation.ActionLayout;
-import org.apache.isis.applib.annotation.BookmarkPolicy;
-import org.apache.isis.applib.annotation.DomainService;
-import org.apache.isis.applib.annotation.DomainServiceLayout;
-import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.NatureOfService;
-import org.apache.isis.applib.annotation.ParameterLayout;
-import org.apache.isis.applib.annotation.SemanticsOf;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.eventbus.ActionDomainEvent;
 
 @DomainService(
@@ -40,34 +32,37 @@ import org.apache.isis.applib.services.eventbus.ActionDomainEvent;
         menuOrder = "10"
 )
 public class ProjectMenu {
-    @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
-    @MemberOrder(sequence = "1")
-    public List<Project> listProjects() {
-        return projectRepository.listAll();
-    }
 
+    public static class CreateDomainEvent extends ActionDomainEvent<ProjectMenu> {}
+    @Action(domainEvent = CreateDomainEvent.class,
+            semantics = SemanticsOf.NON_IDEMPOTENT)
+    @MemberOrder(sequence = "1")
+    public Project newProject(
+            @ParameterLayout(named="Code")
+            final String code,
+            @ParameterLayout(named="Name")
+            final String name,
+            @ParameterLayout(named="Description")
+            final String descriptions) {
+        return projectRepository.create(code, name, descriptions);
+    }
 
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     @MemberOrder(sequence = "2")
-    public List<Project> findByName(
+    public List<Project> findProjects(
             @ParameterLayout(named="Name")
             final String name
     ) {
         return projectRepository.findByName(name);
     }
 
-    public static class CreateDomainEvent extends ActionDomainEvent<ProjectMenu> {}
-    @Action(domainEvent = CreateDomainEvent.class,
-            semantics = SemanticsOf.NON_IDEMPOTENT)
+    @Action(semantics = SemanticsOf.SAFE)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     @MemberOrder(sequence = "3")
-    public Project create(
-            @ParameterLayout(named="Name")
-            final String name,
-            @ParameterLayout(named="Code")
-            final String code) {
-        return projectRepository.create(name, code);
+    @Property()
+    public List<Project> allProjects() {
+        return projectRepository.listAll();
     }
 
     @javax.inject.Inject

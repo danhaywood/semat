@@ -31,8 +31,8 @@
                     <bs3:row>
                         <bs3:col span="12">
                             <c:fieldSet name="Properties" unreferencedProperties="true">
-                                <c:property id="state"/>
-                                <c:property id="item"/>
+                                <c:property id="stateName"/>
+                                <c:property id="itemName"/>
                                 <c:property id="achieved">
                                     <c:action id="achieve" cssClassFa="fa-thumbs-up"/>
                                     <c:action id="unachieve" cssClassFa="fa-thumbs-down"/>

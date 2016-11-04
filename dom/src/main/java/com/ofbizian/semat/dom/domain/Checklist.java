@@ -82,7 +82,12 @@ public class Checklist extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private int sequence;
 
-    @Title(sequence = "1")
+    @PropertyLayout(named="Checklist Item")
+    public String getItemName() {
+        return item.getDescription();
+    }
+
+    @Programmatic
     public Item getItem() {
         return item;
     }
@@ -91,7 +96,7 @@ public class Checklist extends AbstractPersistable {
         this.item = item;
     }
 
-    @Title(sequence = "2")
+    @Programmatic
     public State getState() {
         return state;
     }
@@ -109,6 +114,10 @@ public class Checklist extends AbstractPersistable {
         this.sequence = sequence;
     }
 
+    @PropertyLayout(hidden = Where.ALL_TABLES)
+    public String getStateName() {
+        return state.getName();
+    }
     @Override
     public int compareTo(AbstractPersistable other) {
         return new CompareToBuilder()

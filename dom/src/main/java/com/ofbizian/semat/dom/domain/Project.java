@@ -24,13 +24,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
-import org.apache.isis.applib.annotation.BookmarkPolicy;
-import org.apache.isis.applib.annotation.CollectionLayout;
-import org.apache.isis.applib.annotation.DomainObjectLayout;
-import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Programmatic;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Where;
+import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.services.repository.RepositoryService;
 
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
@@ -80,6 +75,7 @@ public class Project extends AbstractPersistable {
         return code;
     }
 
+    @Programmatic
     public void setCode(String code) {
         this.code = code;
     }
@@ -88,6 +84,7 @@ public class Project extends AbstractPersistable {
         return name;
     }
 
+    @Programmatic
     public void setName(String name) {
         this.name = name;
     }
@@ -97,6 +94,7 @@ public class Project extends AbstractPersistable {
         return description;
     }
 
+    @Programmatic
     public void setDescription(String description) {
         this.description = description;
     }
@@ -245,5 +243,47 @@ public class Project extends AbstractPersistable {
         }
         return lastState;
     }
+
+    @MemberOrder(sequence = "3", name = "description")
+    @Action
+    public Project update(
+            @ParameterLayout(named="Code")
+            final String code,
+            @ParameterLayout(named="Name")
+            final String name,
+            @ParameterLayout(named="Description")
+            @Parameter(optionality = Optionality.OPTIONAL)
+            final String description) {
+        setCode(code);
+        setName(name);
+        setDescription(description);
+        return this;
+    }
+
+    public String default0Update() {
+        return getCode();
+    }
+
+    public String default1Update() {
+        return getName();
+    }
+
+    public String default2Update() {
+        return getDescription();
+    }
+
+    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
+    public List<Project> remove() {
+        projectRepository.remove(this);
+        return projectRepository.listAll();
+    }
+
+    @javax.inject.Inject
+    RepositoryService repositoryService;
+
+
+
+    @javax.inject.Inject
+    ProjectRepository projectRepository;
 
 }

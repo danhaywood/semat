@@ -41,7 +41,6 @@ public class AlphaState extends AbstractPersistable {
     @javax.jdo.annotations.Column(allowsNull = "false")
     private int sequence;
 
-    @Title(sequence = "1")
     @PropertyLayout(hidden = Where.EVERYWHERE)
     public Alpha getAlpha() {
         return alpha;
@@ -51,17 +50,34 @@ public class AlphaState extends AbstractPersistable {
         this.alpha = alpha;
     }
 
-    @Title(sequence = "2")
-    @MemberOrder(sequence = "1")
+    @Title()
+    @PropertyLayout(hidden = Where.EVERYWHERE)
     public State getState() {
         return state;
     }
 
+    @PropertyLayout(hidden = Where.ALL_TABLES)
+    public String getAlphaName() {
+        return alpha.toString();
+    }
+
+    @MemberOrder(sequence = "1")
+    public String getStateName() {
+        return state.getName();
+    }
+
+    @MemberOrder(sequence = "3")
+    @PropertyLayout(hidden = Where.ALL_TABLES)
+    public String getStateDescription() {
+        return state.getDescription();
+    }
+
+    @Programmatic
     public void setState(State state) {
         this.state = state;
     }
 
-    @MemberOrder(sequence = "2")
+    @MemberOrder(sequence = "4")
     @Property(
             editing = Editing.DISABLED,
             editingDisabledReason = "Use actions to change"
@@ -122,6 +138,10 @@ public class AlphaState extends AbstractPersistable {
         return "(" + achieved + "/" + total + ")";
     }
 
+    @CollectionLayout(defaultView = "table")
+    public SortedSet<Checklist> getChecklists() {
+        return getState().getChecklists();
+    }
 
     @Override
     public int compareTo(AbstractPersistable other) {

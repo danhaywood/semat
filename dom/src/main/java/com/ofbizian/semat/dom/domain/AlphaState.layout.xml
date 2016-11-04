@@ -27,12 +27,13 @@
     <bs3:row>
         <bs3:col span="5">
             <bs3:tabGroup>
-                <bs3:tab name="General">
+                <bs3:tab name="Alpha State">
                     <bs3:row>
                         <bs3:col span="12">
                             <c:fieldSet name="Properties" unreferencedProperties="true">
-                                <c:property id="alpha"/>
-                                <c:property id="state"/>
+                                <c:property id="alphaName"/>
+                                <c:property id="stateName"/>
+                                <c:property id="stateDescription"/>
                                 <c:property id="summary"/>
                                 <c:property id="achieved">
                                     <c:action id="achieve" cssClassFa="fa-thumbs-up"/>

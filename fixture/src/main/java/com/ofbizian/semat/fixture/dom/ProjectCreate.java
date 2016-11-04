@@ -24,8 +24,9 @@ import com.ofbizian.semat.dom.domain.ProjectMenu;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
 
 public class ProjectCreate extends FixtureScript {
-    private String name;
     private String code;
+    private String name;
+    private String description;
 
     public String getName() {
         return name;
@@ -43,6 +44,14 @@ public class ProjectCreate extends FixtureScript {
         this.code = code;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private Project project;
 
     public Project getProject() {
@@ -53,8 +62,9 @@ public class ProjectCreate extends FixtureScript {
     protected void execute(final ExecutionContext ec) {
         String name = checkParam("name", ec, String.class);
         String code = checkParam("code", ec, String.class);
+        String description = checkParam("description", ec, String.class);
 
-        this.project = wrap(menu).create(name, code);
+        this.project = wrap(menu).newProject(code, name, description);
         ec.addResult(this, project);
     }
 

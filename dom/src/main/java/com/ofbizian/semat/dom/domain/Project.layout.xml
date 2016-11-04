@@ -27,13 +27,15 @@
     <bs3:row>
         <bs3:col span="5">
             <bs3:tabGroup>
-                <bs3:tab name="General">
+                <bs3:tab name="Project">
                     <bs3:row>
                         <bs3:col span="12">
                             <c:fieldSet name="Properties" unreferencedProperties="true">
                                 <c:property id="code"/>
                                 <c:property id="name"/>
                                 <c:property id="description"/>
+                                <c:action id="update" position="PANEL_DROPDOWN"/>
+                                <c:action id="remove" position="PANEL_DROPDOWN"/>
                             </c:fieldSet>
                         </bs3:col>
                     </bs3:row>

@@ -50,16 +50,29 @@ public class ProjectRepository {
                         "name", name));
     }
 
-    public Project create(String name, String code) {
+    public Project create(String code, String name, String description) {
         final Project object = new Project();
-        object.setName(name);
         object.setCode(code);
+        object.setName(name);
+        object.setDescription(description);
 
         serviceRegistry.injectServicesInto(object);
         object.init();
         createAlphas(object);
         repositoryService.persist(object);
         return object;
+    }
+
+    public void remove(Project project) {
+        repositoryService.removeAndFlush(project.getOpportunity().getAlphaStates());
+//        repositoryService.removeAndFlush(project.getOpportunity());
+//        repositoryService.removeAndFlush(project.getStakeholders());
+//        repositoryService.removeAndFlush(project.getRequirements());
+//        repositoryService.removeAndFlush(project.getSoftwareSystem());
+//        repositoryService.removeAndFlush(project.getTeam());
+//        repositoryService.removeAndFlush(project.getWork());
+//        repositoryService.removeAndFlush(project.getWayOfWorking());
+//        repositoryService.removeAndFlush(project);
     }
 
     private void createAlphas(Project object) {
