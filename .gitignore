@@ -7,4 +7,4 @@ target
 *.log
 **/*.log
 **/*.iml
-webapp/logs/sql.log.1
+webapp/logs/*
