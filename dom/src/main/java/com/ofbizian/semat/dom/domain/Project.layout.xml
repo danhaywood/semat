@@ -17,7 +17,7 @@
                                 <c:property id="name"/>
                                 <c:property id="description"/>
                                 <c:action id="update" position="PANEL_DROPDOWN"/>
-                                <c:action id="remove" position="PANEL_DROPDOWN"/>
+                                <!--<c:action id="remove" position="PANEL_DROPDOWN"/>-->
                             </c:fieldSet>
                         </bs3:col>
                     </bs3:row>

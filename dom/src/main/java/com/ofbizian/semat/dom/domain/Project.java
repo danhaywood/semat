@@ -256,11 +256,11 @@ public class Project extends AbstractPersistable {
         return getDescription();
     }
 
-    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
-    public List<Project> remove() {
-        projectRepository.remove(this);
-        return projectRepository.listAll();
-    }
+//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
+//    public List<Project> remove() {
+//        projectRepository.remove(this);
+//        return projectRepository.listAll();
+//    }
 
     @javax.inject.Inject
     RepositoryService repositoryService;

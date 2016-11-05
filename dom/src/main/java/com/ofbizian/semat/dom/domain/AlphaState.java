@@ -121,6 +121,6 @@ public class AlphaState extends AbstractPersistable {
     }
 
     public String title() {
-        return getAlpha().getName() + " " + state.getName();
+        return getAlpha().getName() + ": " + state.getName();
     }
 }

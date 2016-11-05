@@ -20,13 +20,12 @@ public class UserFixture extends FixtureScript {
     @Override
     protected void execute(final ExecutionContext ec) {
 
-        ec.executeChild(this, new SematRoleAndPermissionsFixtureScript("semat", "Semat Application User Role"));
+        ec.executeChild(this, new SematRoleAndPermissionsFixtureScript("semat-admin", "Semat Application Admin Role"));
 
         ec.executeChild(this, new AbstractTenancyFixtureScript(){
             @Override
             protected void execute(ExecutionContext executionContext) {
-                create("Semat Demo", "/semat", null, executionContext);
-
+                create("Demo Tenancy", "/demo", null, executionContext);
             }
         });
 
@@ -72,9 +71,9 @@ public class UserFixture extends FixtureScript {
             }
         });
 
-        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("user", "user", null, "/semat", AccountType.LOCAL, Lists.newArrayList("semat","isis-module-security-regular-user", "persistable-mixins-user")){});
+        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("user", "user", null, "/demo", AccountType.LOCAL, Lists.newArrayList("semat-admin","isis-module-security-regular-user", "persistable-mixins-user")){});
 
-        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("admin", "admin", null, "/", AccountType.LOCAL, Lists.newArrayList("semat","isis-module-security-admin", "todoapp-auditing-admin", "metadata-menu-user", "persistable-mixins-user", "todoapp-sessionlogger-admin", "todoapp-settings-admin", "todoapp-command-admin")){});
+        ec.executeChild(this, new AbstractUserAndRolesFixtureScript("admin", "admin", null, "/", AccountType.LOCAL, Lists.newArrayList("semat-admin","isis-module-security-admin", "todoapp-auditing-admin", "metadata-menu-user", "persistable-mixins-user", "todoapp-sessionlogger-admin", "todoapp-settings-admin", "todoapp-command-admin")){});
     }
 
     private static class SematRoleAndPermissionsFixtureScript extends AbstractRoleAndPermissionsFixtureScript {

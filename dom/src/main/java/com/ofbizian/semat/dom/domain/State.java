@@ -42,7 +42,6 @@ public class State extends AbstractPersistable {
         return "(" + achieved + "/" + total + ")";
     }
 
-
     @CollectionLayout(defaultView = "table")
     @javax.jdo.annotations.Persistent(mappedBy = "state", defaultFetchGroup = "true")
     public SortedSet<Checklist> getChecklists() {

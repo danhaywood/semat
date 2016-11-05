@@ -50,12 +50,12 @@ public class RecreateProjects extends AbstractFixtureScript {
     }
 
     private void createWayOfWorkingStates(ExecutionContext ec, Alpha wayOfWorking) {
-        final State estabilished = createAlphaState(ec, wayOfWorking, 1, "Principles Established", "The principles, and constraints, that shape the way-of-working are established.", true);
-        final State foundationEstabilished = createAlphaState(ec, wayOfWorking, 2, "Foundation Established", "The key practices, and tools, that form the foundation of the way of working are selected and ready for use.", true);
-        final State inUse = createAlphaState(ec, wayOfWorking, 3, "In Use", "Some members of the team are using, and adapting, the way-of- working.", true);
-        final State inPlace = createAlphaState(ec, wayOfWorking, 4, "In Place", "All team members are using the way of working to accomplish their work.", true);
-        final State working = createAlphaState(ec, wayOfWorking, 5, "Working well", "The team's way of working is working well for the team.", false);
-        final State retired = createAlphaState(ec, wayOfWorking, 6, "Retired", "The way of working is no longer in use by the team.", false);
+        State estabilished = createAlphaState(ec, wayOfWorking, 1, "Principles Established", "The principles, and constraints, that shape the way-of-working are established.", true);
+        State foundationEstabilished = createAlphaState(ec, wayOfWorking, 2, "Foundation Established", "The key practices, and tools, that form the foundation of the way of working are selected and ready for use.", true);
+        State inUse = createAlphaState(ec, wayOfWorking, 3, "In Use", "Some members of the team are using, and adapting, the way-of- working.", true);
+        State inPlace = createAlphaState(ec, wayOfWorking, 4, "In Place", "All team members are using the way of working to accomplish their work.", true);
+        State working = createAlphaState(ec, wayOfWorking, 5, "Working well", "The team's way of working is working well for the team.", false);
+        State retired = createAlphaState(ec, wayOfWorking, 6, "Retired", "The way of working is no longer in use by the team.", false);
 
         createChecklist(ec, estabilished, 1, "Principles and constraints are committed to by the team.", true);
         createChecklist(ec, estabilished, 2, "Principles and constraints are agreed to by the stakeholders.", true);
@@ -92,11 +92,11 @@ public class RecreateProjects extends AbstractFixtureScript {
     }
 
     private void createTeamStates(ExecutionContext ec, Alpha team) {
-        final State seeded = createAlphaState(ec, team, 1, "Seeded", "The team’s mission is clear and the know-how needed to grow the team is in place.", true);
-        final State formed = createAlphaState(ec, team, 2, "Formed", "The team has been populated with enough committed people to start the mission.", true);
-        final State collaborating = createAlphaState(ec, team, 3, "Collaborating", "The team members are working together as one unit.", false);
-        final State performing = createAlphaState(ec, team, 4, "Performing", "The team is working effectively and efficiently.", false);
-        final State adjourned = createAlphaState(ec, team, 5, "Adjourned", "The team is no longer accountable for carrying out its mission.", false);
+        State seeded = createAlphaState(ec, team, 1, "Seeded", "The team’s mission is clear and the know-how needed to grow the team is in place.", true);
+        State formed = createAlphaState(ec, team, 2, "Formed", "The team has been populated with enough committed people to start the mission.", true);
+        State collaborating = createAlphaState(ec, team, 3, "Collaborating", "The team members are working together as one unit.", false);
+        State performing = createAlphaState(ec, team, 4, "Performing", "The team is working effectively and efficiently.", false);
+        State adjourned = createAlphaState(ec, team, 5, "Adjourned", "The team is no longer accountable for carrying out its mission.", false);
 
         createChecklist(ec, seeded, 1, "The team mission has been defined in terms of the opportunities and outcomes.", true);
         createChecklist(ec, seeded, 2, "Constraints on the team's operation are known.", true);
@@ -138,13 +138,12 @@ public class RecreateProjects extends AbstractFixtureScript {
     }
 
     private void createWorkStates(ExecutionContext ec, Alpha work) {
-        final State initiated = createAlphaState(ec, work, 1, "Initiated", "The work has been requested.", true);
-        final State prepared = createAlphaState(ec, work, 2, "Prepared", "All pre-conditions for starting the work have been met.", true);
-        final State started = createAlphaState(ec, work, 3, "Started", "The work is proceeding.", true);
-        final State controlled = createAlphaState(ec, work, 4, "Under Control", "The work is going well, risks are under control, and productivity levels are sufficient to achieve a satisfactory result.", false);
-        final State concluded = createAlphaState(ec, work, 5, "Concluded", "The work to produce the results has been concluded.", false);
-        final State closed = createAlphaState(ec, work, 6, "Closed", "All remaining housekeeping tasks have been completed and the work has been officially closed.", false);
-
+        State initiated = createAlphaState(ec, work, 1, "Initiated", "The work has been requested.", true);
+        State prepared = createAlphaState(ec, work, 2, "Prepared", "All pre-conditions for starting the work have been met.", true);
+        State started = createAlphaState(ec, work, 3, "Started", "The work is proceeding.", true);
+        State controlled = createAlphaState(ec, work, 4, "Under Control", "The work is going well, risks are under control, and productivity levels are sufficient to achieve a satisfactory result.", false);
+        State concluded = createAlphaState(ec, work, 5, "Concluded", "The work to produce the results has been concluded.", false);
+        State closed = createAlphaState(ec, work, 6, "Closed", "All remaining housekeeping tasks have been completed and the work has been officially closed.", false);
 
         createChecklist(ec, initiated, 1, "The result required of the work being initiated is clear.", true);
         createChecklist(ec, initiated, 2, "Any constraints on the work’s performance are clearly identified.", true);
@@ -193,12 +192,12 @@ public class RecreateProjects extends AbstractFixtureScript {
     }
 
     private void createOpportunityStates(ExecutionContext ec, Alpha opportunity) {
-        final State identified = createAlphaState(ec, opportunity, 1, "Identified", "A commercial, social, or business opportunity has been identified that could be addressed by a software-based solution.", true);
-        final State solutionNeeded = createAlphaState(ec, opportunity, 2, "Solution Needed", "The need for a software-based solution has been confirmed.", true);
-        final State valueEstabilished = createAlphaState(ec, opportunity, 3, "Value Established", "The value of a successful solution has been established.", true);
-        final State viable = createAlphaState(ec, opportunity, 4, "Viable", "It is agreed that a solution can be produced quickly and cheaply enough to successfully address the opportunity.", false);
-        final State addressed = createAlphaState(ec, opportunity, 5, "Addressed", "A solution has been produced that demonstrably addresses the opportunity.", false);
-        final State benefitAccured = createAlphaState(ec, opportunity, 6, "Benefit Accrued", "The operational use or sale of the solution is creating tangible benefits.", false);
+        State identified = createAlphaState(ec, opportunity, 1, "Identified", "A commercial, social, or business opportunity has been identified that could be addressed by a software-based solution.", true);
+        State solutionNeeded = createAlphaState(ec, opportunity, 2, "Solution Needed", "The need for a software-based solution has been confirmed.", true);
+        State valueEstabilished = createAlphaState(ec, opportunity, 3, "Value Established", "The value of a successful solution has been established.", true);
+        State viable = createAlphaState(ec, opportunity, 4, "Viable", "It is agreed that a solution can be produced quickly and cheaply enough to successfully address the opportunity.", false);
+        State addressed = createAlphaState(ec, opportunity, 5, "Addressed", "A solution has been produced that demonstrably addresses the opportunity.", false);
+        State benefitAccured = createAlphaState(ec, opportunity, 6, "Benefit Accrued", "The operational use or sale of the solution is creating tangible benefits.", false);
 
 
         createChecklist(ec, identified, 1, "An idea for a way of improving current ways of working, increasing market share, or applying a new or innovative software system has been identified.", true);
@@ -233,12 +232,12 @@ public class RecreateProjects extends AbstractFixtureScript {
     }
 
     private void createStakeholdersStates(ExecutionContext ec, Alpha stakeholders) {
-        final State recognized = createAlphaState(ec, stakeholders, 1, "Recognized", "Stakeholders have been identified.", true);
-        final State represented = createAlphaState(ec, stakeholders, 2, "Represented", "The mechanisms for involving the stakeholders are agreed and the stakeholder representatives have been appointed.", true);
-        final State involved = createAlphaState(ec, stakeholders, 3, "Involved", "The stakeholder representatives are actively involved in the work and fulfilling their responsibilities.", true);
-        final State inAgreement = createAlphaState(ec, stakeholders, 4, "In Agreement", "The stakeholder representatives are in agreement.", false);
-        final State inDeployment = createAlphaState(ec, stakeholders, 5, "Satisfied for Deployment", "The minimal expectations of the stakeholder representatives have been achieved.", false);
-        final State inUse = createAlphaState(ec, stakeholders, 6, "Satisfied in Use", "The system has met or exceeds the minimal stakeholder expectations.", false);
+        State recognized = createAlphaState(ec, stakeholders, 1, "Recognized", "Stakeholders have been identified.", true);
+        State represented = createAlphaState(ec, stakeholders, 2, "Represented", "The mechanisms for involving the stakeholders are agreed and the stakeholder representatives have been appointed.", true);
+        State involved = createAlphaState(ec, stakeholders, 3, "Involved", "The stakeholder representatives are actively involved in the work and fulfilling their responsibilities.", true);
+        State inAgreement = createAlphaState(ec, stakeholders, 4, "In Agreement", "The stakeholder representatives are in agreement.", false);
+        State inDeployment = createAlphaState(ec, stakeholders, 5, "Satisfied for Deployment", "The minimal expectations of the stakeholder representatives have been achieved.", false);
+        State inUse = createAlphaState(ec, stakeholders, 6, "Satisfied in Use", "The system has met or exceeds the minimal stakeholder expectations.", false);
         createChecklist(ec, recognized, 1, "All the different groups of stakeholders that are, or will be, affected by the development and operation of the software system are identified.", true);
         createChecklist(ec, recognized, 2, "There is agreement on the stakeholder groups to be represented. At a minimum, the stakeholders groups that fund, use, support, and maintain the system have been considered.", true);
         createChecklist(ec, recognized, 3, "The responsibilities of the stakeholder representatives have been defined.", true);
@@ -266,12 +265,12 @@ public class RecreateProjects extends AbstractFixtureScript {
     }
 
     private void createSoftwareSystemStates(ExecutionContext ec, Alpha softwareSystem) {
-        final State selected = createAlphaState(ec, softwareSystem, 1, "Architecture Selected", "An architecture has been selected that addresses the key technical risks and any applicable organizational constraints.", true);
-        final State demonstrable = createAlphaState(ec, softwareSystem, 2, "Demonstrable", "An executable version of the system is available that demonstrates the architecture is fit for purpose and supports testing.", true);
-        final State usable = createAlphaState(ec, softwareSystem, 3, "Usable", "The system is usable and demonstrates all of the quality characteristics of an operational system.", false);
-        final State ready = createAlphaState(ec, softwareSystem, 4, "Ready", "The system (as a whole) has been accepted for deployment in a live environment.", false);
-        final State operational = createAlphaState(ec, softwareSystem, 5, "Operational", "The system is in use in an operational environment.", false);
-        final State retired = createAlphaState(ec, softwareSystem, 6, "Retired", "The system is no longer supported.", false);
+        State selected = createAlphaState(ec, softwareSystem, 1, "Architecture Selected", "An architecture has been selected that addresses the key technical risks and any applicable organizational constraints.", true);
+        State demonstrable = createAlphaState(ec, softwareSystem, 2, "Demonstrable", "An executable version of the system is available that demonstrates the architecture is fit for purpose and supports testing.", true);
+        State usable = createAlphaState(ec, softwareSystem, 3, "Usable", "The system is usable and demonstrates all of the quality characteristics of an operational system.", false);
+        State ready = createAlphaState(ec, softwareSystem, 4, "Ready", "The system (as a whole) has been accepted for deployment in a live environment.", false);
+        State operational = createAlphaState(ec, softwareSystem, 5, "Operational", "The system is in use in an operational environment.", false);
+        State retired = createAlphaState(ec, softwareSystem, 6, "Retired", "The system is no longer supported.", false);
 
         createChecklist(ec, selected, 1, "The criteria to be used when selecting the architecture have been agreed on.", true);
         createChecklist(ec, selected, 2, "Hardware platforms have been identified.", true);
@@ -311,12 +310,12 @@ public class RecreateProjects extends AbstractFixtureScript {
     }
 
     private void createRequirementsStates(ExecutionContext ec, Alpha requirements) {
-        final State conceived = createAlphaState(ec, requirements, 1, "Conceived", "The need for a new system has been agreed.", true);
-        final State bounded = createAlphaState(ec, requirements, 2, "Bounded", "The purpose and extent of the new system are clear.", true);
-        final State coherent = createAlphaState(ec, requirements, 3, "Coherent", "The requirements provide a consistent description of the essential", true);
-        final State acceptable = createAlphaState(ec, requirements, 4, "Acceptable", "The requirements describe a system that is acceptable to the stakeholders.", false);
-        final State addressed = createAlphaState(ec, requirements, 5, "Addressed", "Enough of the requirements have been addressed to satisfy the need for a new system in a way that is acceptable to the stakeholders.", false);
-        final State fulfilled = createAlphaState(ec, requirements, 6, "Fulfilled", "The requirements that have been addressed fully satisfy the need for a new system.", false);
+        State conceived = createAlphaState(ec, requirements, 1, "Conceived", "The need for a new system has been agreed.", true);
+        State bounded = createAlphaState(ec, requirements, 2, "Bounded", "The purpose and extent of the new system are clear.", true);
+        State coherent = createAlphaState(ec, requirements, 3, "Coherent", "The requirements provide a consistent description of the essential", true);
+        State acceptable = createAlphaState(ec, requirements, 4, "Acceptable", "The requirements describe a system that is acceptable to the stakeholders.", false);
+        State addressed = createAlphaState(ec, requirements, 5, "Addressed", "Enough of the requirements have been addressed to satisfy the need for a new system in a way that is acceptable to the stakeholders.", false);
+        State fulfilled = createAlphaState(ec, requirements, 6, "Fulfilled", "The requirements that have been addressed fully satisfy the need for a new system.", false);
 
         createChecklist(ec, conceived, 1, "The initial set of stakeholders agrees that a system is to be produced.", true);
         createChecklist(ec, conceived, 2, "The stakeholders that will use the new system are identified.", true);
