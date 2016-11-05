@@ -15,7 +15,7 @@ public class AppUserRegistrationService extends SecurityModuleAppUserRegistratio
         return findRole("isis-module-security-regular-user");
     }
     protected Set<ApplicationRole> getAdditionalInitialRoles() {
-        return Collections.singleton(findRole("easter2017"));
+        return Collections.singleton(findRole("semat"));
     }
     private ApplicationRole findRole(final String roleName) {
         return applicationRoleRepository.findByNameCached(roleName);
