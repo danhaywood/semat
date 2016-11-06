@@ -3,7 +3,7 @@
 
     <bs3:row>
         <bs3:col span="12" unreferencedActions="true">
-            <c:domainObject bookmarking="AS_ROOT"/>
+            <c:domainObject/>
         </bs3:col>
     </bs3:row>
     <bs3:row>

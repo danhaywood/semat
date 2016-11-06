@@ -2,6 +2,7 @@ package com.ofbizian.semat.dom.domain;
 
 import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.Persistent;
 
 import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.DomainObject;
@@ -19,6 +20,7 @@ public class Alpha extends AbstractPersistable {
     private Concern concern;
     private AlphaType alphaType;
     private String name;
+    private Project project;
 
     public Alpha(AlphaType alphaType, String name, Concern concern) {
         this.alphaType = alphaType;
@@ -47,6 +49,15 @@ public class Alpha extends AbstractPersistable {
 
     public void setAlphaStates(SortedSet<AlphaState> alphaStates) {
         this.alphaStates = alphaStates;
+    }
+
+    @Programmatic
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 
     public String iconName() {

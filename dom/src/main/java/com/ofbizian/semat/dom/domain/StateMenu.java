@@ -10,7 +10,7 @@ import org.apache.isis.applib.services.eventbus.ActionDomainEvent;
         repositoryFor = State.class
 )
 @DomainServiceLayout(
-        named = "States",
+        named = "Templates",
         menuOrder = "20"
 )
 public class StateMenu {
@@ -28,7 +28,7 @@ public class StateMenu {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+//    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     @MemberOrder(sequence = "2")
     public List<State> findStates(
             @ParameterLayout(named="Alpha Type")
@@ -38,7 +38,7 @@ public class StateMenu {
     }
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
+//    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     @MemberOrder(sequence = "3")
     @Property()
     public List<State> allState() {

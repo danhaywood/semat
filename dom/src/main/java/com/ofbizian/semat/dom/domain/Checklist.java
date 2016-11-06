@@ -3,20 +3,14 @@ package com.ofbizian.semat.dom.domain;
 import javax.jdo.annotations.IdentityType;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
-import org.apache.isis.applib.annotation.Action;
-import org.apache.isis.applib.annotation.Editing;
-import org.apache.isis.applib.annotation.InvokeOn;
-import org.apache.isis.applib.annotation.MemberOrder;
-import org.apache.isis.applib.annotation.Programmatic;
-import org.apache.isis.applib.annotation.Property;
-import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Where;
+import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.util.ObjectContracts;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
         schema = "simple"
 )
+@DomainObjectLayout(bookmarking= BookmarkPolicy.AS_CHILD)
 public class Checklist extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
@@ -61,6 +55,16 @@ public class Checklist extends AbstractPersistable {
 
     public String disableUnachieve() {
         return isAchieved() ? null : "Already unachieved";
+    }
+
+    @Action
+    public Project goToProject() {
+        return getAlphaState().getAlpha().getProject();
+    }
+
+    @Action
+    public AlphaState goToAlpha() {
+        return getAlphaState();
     }
 
     @javax.jdo.annotations.Column(allowsNull = "false")

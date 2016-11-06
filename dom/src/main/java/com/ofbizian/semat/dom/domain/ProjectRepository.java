@@ -31,8 +31,13 @@ public class ProjectRepository {
 
         serviceRegistry.injectServicesInto(object);
         object.init();
-        stateRepository.createProjectAlphas(object);
+        final List<Alpha> projectAlphas = stateRepository.createProjectAlphas(object);
+
         repositoryService.persist(object);
+
+        for (Alpha alpha : projectAlphas) {
+            alpha.setProject(object);
+        }
         return object;
     }
 

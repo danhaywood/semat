@@ -1,5 +1,6 @@
 package com.ofbizian.semat.dom.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedSet;
 
@@ -21,7 +22,7 @@ public class StateRepository {
     @javax.inject.Inject
     ServiceRegistry2 serviceRegistry;
 
-    public void createProjectAlphas(Project object) {
+    public List<Alpha> createProjectAlphas(Project object) {
         Alpha opportunity = new Alpha(AlphaType.OPPORTUNITY, "Opportunity", Concern.CUSTOMER);
         Alpha stakeholders = new Alpha(AlphaType.STAKEHOLDERS, "Stakeholders", Concern.CUSTOMER);
         Alpha requirements = new Alpha(AlphaType.REQUIREMENTS, "Requirements", Concern.SOLUTION);
@@ -30,13 +31,14 @@ public class StateRepository {
         Alpha work = new Alpha(AlphaType.WORK, "Work", Concern.ENDEAVOR);
         Alpha wayOfWorking = new Alpha(AlphaType.WAY_OF_WORKING, "Way Of Working", Concern.ENDEAVOR);
 
-        createAlpha(opportunity);
-        createAlpha(stakeholders);
-        createAlpha(requirements);
-        createAlpha(softwareSystem);
-        createAlpha(team);
-        createAlpha(work);
-        createAlpha(wayOfWorking);
+        List<Alpha> alphas = new ArrayList<>();
+        alphas.add(createAlpha(opportunity));
+        alphas.add(createAlpha(stakeholders));
+        alphas.add(createAlpha(requirements));
+        alphas.add(createAlpha(softwareSystem));
+        alphas.add(createAlpha(team));
+        alphas.add(createAlpha(work));
+        alphas.add(createAlpha(wayOfWorking));
 
         object.setOpportunity(opportunity);
         object.setStakeholders(stakeholders);
@@ -45,9 +47,10 @@ public class StateRepository {
         object.setTeam(team);
         object.setWork(work);
         object.setWayOfWorking(wayOfWorking);
+        return alphas;
     }
 
-    private void createAlpha(Alpha object) {
+    private Alpha createAlpha(Alpha object) {
         serviceRegistry.injectServicesInto(object);
         object.init();
         repositoryService.persist(object);
@@ -62,6 +65,7 @@ public class StateRepository {
                 createChecklist(alphaState, item, false, j++);
             }
         }
+        return object;
     }
 
     public List<Alpha> listAlphas() {

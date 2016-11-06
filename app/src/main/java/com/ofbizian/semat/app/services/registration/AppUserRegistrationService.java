@@ -48,8 +48,7 @@ public class AppUserRegistrationService extends SecurityModuleAppUserRegistratio
             }
         }
 
-        //TODO set all registered users to demo tenancy for now
-        final ApplicationTenancy applicationTenancy = applicationTenancyRepository.findByPath("/demo");
+        final ApplicationTenancy applicationTenancy = applicationTenancyRepository.newTenancy(username, "/" + username, null);
         applicationUser.setTenancy(applicationTenancy);
     }
 

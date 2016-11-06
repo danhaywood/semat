@@ -11,6 +11,7 @@ import org.apache.isis.applib.util.ObjectContracts;
         identityType= IdentityType.DATASTORE,
         schema = "simple"
 )
+@DomainObjectLayout(bookmarking= BookmarkPolicy.AS_CHILD)
 public class AlphaState extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
@@ -113,6 +114,11 @@ public class AlphaState extends AbstractPersistable {
 
     public void setSequence(int sequence) {
         this.sequence = sequence;
+    }
+
+    @Action
+    public Project goToProject() {
+        return getAlpha().getProject();
     }
 
     @MemberOrder(sequence = "3")
