@@ -141,4 +141,9 @@ public class StateRepository {
         return repositoryService.allInstances(Checklist.class);
     }
 
+    public Item createStateItem(String descriptions, State state) {
+        final Item item = createItem(descriptions);
+        state.addToItems(item);
+        return item;
+    }
 }

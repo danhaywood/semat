@@ -45,6 +45,18 @@ public class StateMenu {
         return stateRepository.listStates();
     }
 
+//
+//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
+//    @MemberOrder(sequence = "1")
+//    public State newStateItem(
+//            @ParameterLayout(named="State")
+//            final State state,
+//            @ParameterLayout(named="Description")
+//            final String descriptions) {
+//        return stateRepository.createStateItem(descriptions, state);
+//    }
+//
+
     @javax.inject.Inject
     StateRepository stateRepository;
 

@@ -4,8 +4,10 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import javax.jdo.annotations.IdentityType;
 
+import org.apache.isis.applib.annotation.Action;
 import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.annotation.ParameterLayout;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Title;
@@ -52,6 +54,14 @@ public class State extends AbstractPersistable {
         getItems().add(item);
     }
 
+    @Action
+    public State createItem(
+            @ParameterLayout(named="Description")
+            String description) {
+        stateRepository.createStateItem(description, this);
+        return this;
+    }
+
     public AlphaType getAlphaType() {
         return alphaType;
     }
@@ -80,4 +90,8 @@ public class State extends AbstractPersistable {
     public int compareTo(AbstractPersistable other) {
         return ObjectContracts.compare(this, other, "alphaType", "name", "description", "id");
     }
+
+    @javax.inject.Inject
+    StateRepository stateRepository;
+
 }
