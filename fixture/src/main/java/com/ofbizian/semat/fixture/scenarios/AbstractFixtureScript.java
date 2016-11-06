@@ -7,16 +7,21 @@ import org.apache.isis.applib.services.sudo.SudoService;
 
 public abstract class AbstractFixtureScript extends FixtureScript {
 
+    protected String userName = "user";
+
     @Override
     protected final void execute(final ExecutionContext ec) {
 
-        sudoService.sudo("user", new Runnable() {
+        sudoService.sudo(userName, new Runnable() {
             @Override
             public void run() {
                 doExecute(ec);
             }
         });
+    }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     protected abstract void doExecute(final ExecutionContext ec);

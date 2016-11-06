@@ -2,9 +2,9 @@ package com.ofbizian.semat.fixture.dom;
 
 import com.ofbizian.semat.dom.domain.Project;
 import com.ofbizian.semat.dom.domain.ProjectMenu;
-import org.apache.isis.applib.fixturescripts.FixtureScript;
+import com.ofbizian.semat.fixture.scenarios.AbstractFixtureScript;
 
-public class ProjectCreate extends FixtureScript {
+public class ProjectCreate extends AbstractFixtureScript {
     private String code;
     private String name;
     private String description;
@@ -40,7 +40,7 @@ public class ProjectCreate extends FixtureScript {
     }
 
     @Override
-    protected void execute(final ExecutionContext ec) {
+    protected void doExecute(final ExecutionContext ec) {
         String name = checkParam("name", ec, String.class);
         String code = checkParam("code", ec, String.class);
         String description = checkParam("description", ec, String.class);

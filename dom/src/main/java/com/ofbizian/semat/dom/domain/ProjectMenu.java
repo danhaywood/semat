@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.eventbus.ActionDomainEvent;
+import org.apache.isis.applib.services.wrapper.WrapperFactory;
 
 @DomainService(
         nature = NatureOfService.VIEW_MENU_ONLY,
@@ -37,7 +38,7 @@ public class ProjectMenu {
             @ParameterLayout(named="Name")
             final String name
     ) {
-        return projectRepository.findByName(name);
+        return wrapperFactory.wrap(projectRepository).findByName(name);
     }
 
     @Action(semantics = SemanticsOf.SAFE)
@@ -45,10 +46,13 @@ public class ProjectMenu {
     @MemberOrder(sequence = "3")
     @Property()
     public List<Project> allProjects() {
-        return projectRepository.listAll();
+        return wrapperFactory.wrap(projectRepository).listAll();
     }
 
     @javax.inject.Inject
     ProjectRepository projectRepository;
 
+
+    @javax.inject.Inject
+    WrapperFactory wrapperFactory;
 }

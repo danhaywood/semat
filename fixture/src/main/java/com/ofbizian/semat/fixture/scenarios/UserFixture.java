@@ -14,7 +14,7 @@ import org.isisaddons.module.security.seed.scripts.AbstractUserAndRolesFixtureSc
 public class UserFixture extends FixtureScript {
 
     public UserFixture() {
-        withDiscoverability(Discoverability.DISCOVERABLE);
+        withDiscoverability(Discoverability.NON_DISCOVERABLE);
     }
 
     @Override

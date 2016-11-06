@@ -10,6 +10,7 @@ import com.google.common.collect.Maps;
 import com.ofbizian.semat.dom.DomainAppDomainModule;
 import com.ofbizian.semat.fixture.DomainAppFixtureModule;
 import com.ofbizian.semat.fixture.scenarios.DemoFixture;
+import com.ofbizian.semat.fixture.scenarios.SematFixture;
 import com.ofbizian.semat.fixture.scenarios.UserFixture;
 import org.apache.isis.applib.AppManifest;
 import org.apache.isis.applib.fixturescripts.FixtureScript;
@@ -78,8 +79,9 @@ public class DomainAppAppManifest implements AppManifest {
     @Override
     public List<Class<? extends FixtureScript>> getFixtures() {
         return Lists.newArrayList(
-                UserFixture.class
-                , DemoFixture.class
+                UserFixture.class,
+                SematFixture.class,
+                DemoFixture.class
     );
     }
     /**

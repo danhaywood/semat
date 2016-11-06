@@ -4,7 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.inject.Inject;
 
+import com.ofbizian.semat.fixture.scenarios.SematFixture;
 import org.apache.isis.applib.annotation.DomainService;
+import org.apache.isis.applib.fixturescripts.FixtureScripts;
+import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.services.userreg.UserDetails;
 import org.apache.isis.applib.value.Password;
 import org.isisaddons.module.security.dom.role.ApplicationRole;
@@ -17,12 +20,14 @@ import org.isisaddons.module.security.userreg.SecurityModuleAppUserRegistrationS
 
 @DomainService
 public class AppUserRegistrationService extends SecurityModuleAppUserRegistrationServiceAbstract {
+
     protected ApplicationRole getInitialRole() {
-        return findRole("isis-module-security-regular-user");
+        return findRole("semat-admin");
     }
+
     protected Set<ApplicationRole> getAdditionalInitialRoles() {
         final HashSet<ApplicationRole> applicationRoles = new HashSet<>();
-        applicationRoles.add(findRole("semat-admin"));
+        applicationRoles.add(findRole("isis-module-security-regular-user"));
         applicationRoles.add(findRole("persistable-mixins-user"));
         return applicationRoles;
     }
@@ -48,8 +53,11 @@ public class AppUserRegistrationService extends SecurityModuleAppUserRegistratio
             }
         }
 
+        // set up new user custom
         final ApplicationTenancy applicationTenancy = applicationTenancyRepository.newTenancy(username, "/" + username, null);
         applicationUser.setTenancy(applicationTenancy);
+
+//        fixtureScripts.runFixtureScript(new SematFixture(username), null);
     }
 
     @Inject
@@ -58,7 +66,14 @@ public class AppUserRegistrationService extends SecurityModuleAppUserRegistratio
     @Inject
     private ApplicationUserRepository applicationUserRepository;
 
-
     @Inject
     private ApplicationTenancyRepository applicationTenancyRepository;
+
+    @Inject
+    private FixtureScripts fixtureScripts;
+
+    @Inject
+    private RepositoryService repositoryService;
+
+
 }

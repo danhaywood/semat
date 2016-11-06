@@ -9,6 +9,7 @@ import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.query.QueryDefault;
 import org.apache.isis.applib.services.registry.ServiceRegistry2;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.services.wrapper.WrapperFactory;
 
 @DomainService(
         nature = NatureOfService.DOMAIN,
@@ -21,6 +22,9 @@ public class StateRepository {
 
     @javax.inject.Inject
     ServiceRegistry2 serviceRegistry;
+
+    @javax.inject.Inject
+    WrapperFactory wrapperFactory;
 
     public List<Alpha> createProjectAlphas(Project object) {
         Alpha opportunity = new Alpha(AlphaType.OPPORTUNITY, "Opportunity", Concern.CUSTOMER);
@@ -56,7 +60,7 @@ public class StateRepository {
         repositoryService.persist(object);
 
         int i = 0;
-        List<State> states = findStates(object.getAlphaType());
+        List<State> states = wrapperFactory.wrap(this).findStates(object.getAlphaType());
         for (State state : states) {
             final AlphaState alphaState = createAlphaState(object, state, false, i++);
             final SortedSet<Item> items = state.getItems();
@@ -112,7 +116,7 @@ public class StateRepository {
         return repositoryService.allInstances(AlphaState.class);
     }
 
-    public Item createItem(String description) {
+    private Item createItem(String description) {
         Item object = new Item();
         object.setDescription(description);
         serviceRegistry.injectServicesInto(object);
@@ -144,6 +148,7 @@ public class StateRepository {
     public Item createStateItem(String descriptions, State state) {
         final Item item = createItem(descriptions);
         state.addToItems(item);
+        item.setState(state);
         return item;
     }
 }

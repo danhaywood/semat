@@ -9,7 +9,6 @@ import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
 import org.apache.isis.applib.annotation.*;
-import org.apache.isis.applib.services.repository.RepositoryService;
 import org.apache.isis.applib.util.ObjectContracts;
 
 @javax.jdo.annotations.Queries({
@@ -257,22 +256,9 @@ public class Project extends AbstractPersistable {
         return getDescription();
     }
 
-//    @Action(semantics = SemanticsOf.NON_IDEMPOTENT_ARE_YOU_SURE)
-//    public List<Project> remove() {
-//        projectRepository.remove(this);
-//        return projectRepository.listAll();
-//    }
-
-
     @Override
     public int compareTo(AbstractPersistable other) {
         return ObjectContracts.compare(this, other, "code", "name", "description", "id");
     }
-
-    @javax.inject.Inject
-    RepositoryService repositoryService;
-
-    @javax.inject.Inject
-    ProjectRepository projectRepository;
 
 }

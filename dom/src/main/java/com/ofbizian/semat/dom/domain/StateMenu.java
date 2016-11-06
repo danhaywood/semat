@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.eventbus.ActionDomainEvent;
+import org.apache.isis.applib.services.wrapper.WrapperFactory;
 
 @DomainService(
         nature = NatureOfService.VIEW_MENU_ONLY,
@@ -34,7 +35,7 @@ public class StateMenu {
             @ParameterLayout(named="Alpha Type")
             final AlphaType alphaType
     ) {
-        return stateRepository.findStates(alphaType);
+        return wrapperFactory.wrap(stateRepository).findStates(alphaType);
     }
 
     @Action(semantics = SemanticsOf.SAFE)
@@ -42,7 +43,7 @@ public class StateMenu {
     @MemberOrder(sequence = "3")
     @Property()
     public List<State> allState() {
-        return stateRepository.listStates();
+        return wrapperFactory.wrap(stateRepository).listStates();
     }
 
 //
@@ -59,5 +60,8 @@ public class StateMenu {
 
     @javax.inject.Inject
     StateRepository stateRepository;
+
+    @javax.inject.Inject
+    WrapperFactory wrapperFactory;
 
 }
