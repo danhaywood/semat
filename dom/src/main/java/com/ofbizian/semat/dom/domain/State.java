@@ -1,14 +1,24 @@
 package com.ofbizian.semat.dom.domain;
 
 import java.util.SortedSet;
+import java.util.TreeSet;
 import javax.jdo.annotations.IdentityType;
 
 import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Title;
 import org.apache.isis.applib.annotation.Where;
+import org.apache.isis.applib.util.ObjectContracts;
 
+@javax.jdo.annotations.Queries({
+        @javax.jdo.annotations.Query(
+                name = "findByAlphaType", language = "JDOQL",
+                value = "SELECT "
+                        + "FROM com.ofbizian.semat.dom.domain.State "
+                        + "WHERE alphaType == :alphaType")
+})
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
         schema = "simple"
@@ -21,35 +31,33 @@ public class State extends AbstractPersistable {
     private String name;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
-    @PropertyLayout(multiLine=5, hidden = Where.ALL_TABLES)
     private String description;
 
-    private SortedSet<Checklist> checklists;
+    @javax.jdo.annotations.Column(allowsNull = "false")
+    private AlphaType alphaType;
 
-    public String getChecklistSummary() {
-        final SortedSet<Checklist> checklists = getChecklists();
-        if (checklists == null) {
-            return "(0/0)";
-        }
+    private SortedSet<Item> items = new TreeSet<>();
 
-        int total = checklists.size();
-        int achieved = 0;
-        for (Checklist checklist : checklists) {
-            if (checklist.isAchieved()) {
-                achieved++;
-            }
-        }
-        return "(" + achieved + "/" + total + ")";
+    public SortedSet<Item> getItems() {
+        return items;
     }
 
     @CollectionLayout(defaultView = "table")
     @javax.jdo.annotations.Persistent(mappedBy = "state", defaultFetchGroup = "true")
-    public SortedSet<Checklist> getChecklists() {
-        return checklists;
+    public void setItems(SortedSet<Item> items) {
+        this.items = items;
     }
 
-    public void setChecklists(SortedSet<Checklist> checklists) {
-        this.checklists = checklists;
+    public void addToItems(Item item) {
+        getItems().add(item);
+    }
+
+    public AlphaType getAlphaType() {
+        return alphaType;
+    }
+
+    public void setAlphaType(AlphaType alphaType) {
+        this.alphaType = alphaType;
     }
 
     public String getName() {
@@ -66,5 +74,10 @@ public class State extends AbstractPersistable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int compareTo(AbstractPersistable other) {
+        return ObjectContracts.compare(this, other, "alphaType", "name", "description", "id");
     }
 }

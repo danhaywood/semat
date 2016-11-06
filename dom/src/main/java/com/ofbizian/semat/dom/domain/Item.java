@@ -6,6 +6,7 @@ import org.apache.isis.applib.annotation.DomainObject;
 import org.apache.isis.applib.annotation.PropertyLayout;
 import org.apache.isis.applib.annotation.Title;
 import org.apache.isis.applib.annotation.Where;
+import org.apache.isis.applib.util.ObjectContracts;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
@@ -26,4 +27,8 @@ public class Item extends AbstractPersistable {
         this.description = description;
     }
 
+    @Override
+    public int compareTo(AbstractPersistable other) {
+        return ObjectContracts.compare(this, other, "description", "id");
+    }
 }

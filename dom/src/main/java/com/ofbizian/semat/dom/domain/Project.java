@@ -10,12 +10,13 @@ import javax.jdo.annotations.IdentityType;
 
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.util.ObjectContracts;
 
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
                 name = "findByName", language = "JDOQL",
                 value = "SELECT "
-                        + "FROM Project "
+                        + "FROM com.ofbizian.semat.dom.domain.Project "
                         + "WHERE name.indexOf(:name) >= 0 ")
 })
 @javax.jdo.annotations.PersistenceCapable(
@@ -261,6 +262,12 @@ public class Project extends AbstractPersistable {
 //        projectRepository.remove(this);
 //        return projectRepository.listAll();
 //    }
+
+
+    @Override
+    public int compareTo(AbstractPersistable other) {
+        return ObjectContracts.compare(this, other, "code", "name", "description", "id");
+    }
 
     @javax.inject.Inject
     RepositoryService repositoryService;

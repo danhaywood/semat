@@ -5,6 +5,7 @@ import javax.jdo.annotations.IdentityType;
 
 import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.isis.applib.annotation.*;
+import org.apache.isis.applib.util.ObjectContracts;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
@@ -23,6 +24,18 @@ public class AlphaState extends AbstractPersistable {
 
     @javax.jdo.annotations.Column(allowsNull = "false")
     private int sequence;
+
+    private SortedSet<Checklist> checklists;
+
+    @CollectionLayout(defaultView = "table")
+    @javax.jdo.annotations.Persistent(mappedBy = "alphaState", defaultFetchGroup = "true")
+    public SortedSet<Checklist> getChecklists() {
+        return checklists;
+    }
+
+    public void setChecklists(SortedSet<Checklist> checklists) {
+        this.checklists = checklists;
+    }
 
     @PropertyLayout(hidden = Where.EVERYWHERE)
     public Alpha getAlpha() {
@@ -104,23 +117,35 @@ public class AlphaState extends AbstractPersistable {
 
     @MemberOrder(sequence = "3")
     public String getChecklistSummary() {
-       return getState().getChecklistSummary();
+        final SortedSet<Checklist> checklists = getChecklists();
+        if (checklists == null) {
+            return "(0/0)";
+        }
+
+        int total = checklists.size();
+        int achieved = 0;
+        for (Checklist checklist : checklists) {
+            if (checklist.isAchieved()) {
+                achieved++;
+            }
+        }
+        return "(" + achieved + "/" + total + ")";
     }
 
-    @CollectionLayout(defaultView = "table")
-    public SortedSet<Checklist> getChecklists() {
-        return getState().getChecklists();
+//    @Override
+//    public int compareTo(AbstractPersistable other) {
+//        return new CompareToBuilder()
+//                .append(getSequence(), ((AlphaState) other).getSequence() )
+//                .append(getClass().getName(), other.getClass().getName())
+//                .toComparison();
+//    }
+
+    public String title() {
+        return getAlpha().getName() + ": " + state.getName();
     }
 
     @Override
     public int compareTo(AbstractPersistable other) {
-        return new CompareToBuilder()
-                .append(getSequence(), ((AlphaState) other).getSequence() )
-                .append(getClass().getName(), other.getClass().getName())
-                .toComparison();
-    }
-
-    public String title() {
-        return getAlpha().getName() + ": " + state.getName();
+        return ObjectContracts.compare(this, other, "alpha", "state", "sequence", "id");
     }
 }

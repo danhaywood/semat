@@ -1,6 +1,6 @@
 package com.ofbizian.semat.fixture;
 
-import com.ofbizian.semat.fixture.scenarios.RecreateProjects;
+import com.ofbizian.semat.fixture.scenarios.DemoFixture;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.annotation.NatureOfService;
 import org.apache.isis.applib.fixturescripts.FixtureScripts;
@@ -17,9 +17,9 @@ public class DomainAppFixtureScriptsSpecificationProvider implements FixtureScri
         return FixtureScriptsSpecification
                 .builder(DomainAppFixtureScriptsSpecificationProvider.class)
                 .with(FixtureScripts.MultipleExecutionStrategy.EXECUTE)
-                .withRunScriptDefault(RecreateProjects.class)
+                .withRunScriptDefault(DemoFixture.class)
                 .withRunScriptDropDown(FixtureScriptsSpecification.DropDownPolicy.CHOICES)
-                .withRecreate(RecreateProjects.class)
+                .withRecreate(DemoFixture.class)
                 .build();
     }
 }

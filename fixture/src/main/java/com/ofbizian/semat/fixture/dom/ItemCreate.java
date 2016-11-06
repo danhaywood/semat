@@ -4,6 +4,7 @@ import com.ofbizian.semat.dom.domain.Checklist;
 import com.ofbizian.semat.dom.domain.Item;
 import com.ofbizian.semat.dom.domain.ProjectRepository;
 import com.ofbizian.semat.dom.domain.State;
+import com.ofbizian.semat.dom.domain.StateRepository;
 import com.ofbizian.semat.fixture.scenarios.AbstractFixtureScript;
 
 public class ItemCreate extends AbstractFixtureScript {
@@ -65,18 +66,18 @@ public class ItemCreate extends AbstractFixtureScript {
     @Override
     protected void doExecute(final ExecutionContext ec) {
         String description = checkParam("description", ec, String.class);
-        State state = checkParam("state", ec, State.class);
-        boolean achieved = checkParam("achieved", ec, Boolean.class);
-        int sequence = checkParam("sequence", ec, Integer.class);
+//        State state = checkParam("state", ec, State.class);
+//        boolean achieved = checkParam("achieved", ec, Boolean.class);
+//        int sequence = checkParam("sequence", ec, Integer.class);
 
         this.item = wrap(repository).createItem(description);
-        this.checklist = wrap(repository).createChecklist(state, item, achieved, sequence);
+//        this.checklist = wrap(repository).createChecklist(state, item, achieved, sequence);
 
         ec.addResult(this, item);
-        ec.addResult(this, checklist);
+//        ec.addResult(this, checklist);
     }
 
     @javax.inject.Inject
-    private ProjectRepository repository;
+    private StateRepository repository;
 
 }

@@ -5,6 +5,8 @@ import javax.jdo.annotations.IdentityType;
 
 import org.apache.isis.applib.annotation.CollectionLayout;
 import org.apache.isis.applib.annotation.DomainObject;
+import org.apache.isis.applib.annotation.Programmatic;
+import org.apache.isis.applib.util.ObjectContracts;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
@@ -15,15 +17,22 @@ public class Alpha extends AbstractPersistable {
 
     private SortedSet<AlphaState> alphaStates;
     private Concern concern;
+    private AlphaType alphaType;
     private String name;
 
-    public Alpha(String name, Concern concern) {
+    public Alpha(AlphaType alphaType, String name, Concern concern) {
+        this.alphaType = alphaType;
         this.name = name;
         this.concern = concern;
     }
 
     public Concern getConcern() {
         return concern;
+    }
+
+    @Programmatic
+    public AlphaType getAlphaType() {
+        return alphaType;
     }
 
     public String getName() {
@@ -42,5 +51,10 @@ public class Alpha extends AbstractPersistable {
 
     public String iconName() {
         return name;
+    }
+
+    @Override
+    public int compareTo(AbstractPersistable other) {
+        return ObjectContracts.compare(this, other, "concern", "alphaType", "name", "id");
     }
 }

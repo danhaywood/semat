@@ -10,8 +10,8 @@ import org.apache.isis.applib.annotation.MemberOrder;
 import org.apache.isis.applib.annotation.Programmatic;
 import org.apache.isis.applib.annotation.Property;
 import org.apache.isis.applib.annotation.PropertyLayout;
-import org.apache.isis.applib.annotation.Title;
 import org.apache.isis.applib.annotation.Where;
+import org.apache.isis.applib.util.ObjectContracts;
 
 @javax.jdo.annotations.PersistenceCapable(
         identityType= IdentityType.DATASTORE,
@@ -24,7 +24,7 @@ public class Checklist extends AbstractPersistable {
 
     @PropertyLayout(hidden = Where.PARENTED_TABLES)
     @javax.jdo.annotations.Column(allowsNull = "false")
-    private State state;
+    private AlphaState alphaState;
 
     @javax.jdo.annotations.Column(allowsNull = "false")
     private boolean achieved;
@@ -81,12 +81,12 @@ public class Checklist extends AbstractPersistable {
     }
 
     @Programmatic
-    public State getState() {
-        return state;
+    public AlphaState getAlphaState() {
+        return alphaState;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setAlphaState(AlphaState alphaState) {
+        this.alphaState = alphaState;
     }
 
     @Programmatic
@@ -100,17 +100,21 @@ public class Checklist extends AbstractPersistable {
 
     @PropertyLayout(hidden = Where.ALL_TABLES)
     public String getStateName() {
-        return state.getName();
+        return alphaState.getStateName();
     }
     @Override
     public int compareTo(AbstractPersistable other) {
-        return new CompareToBuilder()
-                .append(getSequence(), ((Checklist) other).getSequence() )
-                .append(getClass().getName(), other.getClass().getName())
-                .toComparison();
+        return ObjectContracts.compare(this, other, "alphaState", "item", "sequence", "id");
+
+//        return new CompareToBuilder()
+//                .append(getSequence(), ((Checklist) other).getSequence() )
+//                .append(getClass().getName(), other.getClass().getName())
+//                .toComparison();
     }
 
     public String title() {
         return "Checklist Item: " + item.getDescription();
     }
+
+
 }
