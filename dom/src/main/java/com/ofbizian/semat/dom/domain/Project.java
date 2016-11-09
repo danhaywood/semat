@@ -10,6 +10,7 @@ import javax.jdo.annotations.IdentityType;
 
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.util.ObjectContracts;
+import org.isisaddons.wicket.wickedcharts.cpt.applib.WickedChart;
 
 @javax.jdo.annotations.Queries({
         @javax.jdo.annotations.Query(
@@ -217,7 +218,7 @@ public class Project extends AbstractPersistable {
         List<AlphaState> list = new ArrayList(alphaStates);
         Collections.sort(list, Collections.reverseOrder());
         Set<AlphaState> resultSet = new LinkedHashSet(list);
-        String lastState = "none";
+        String lastState = "unset";
 
         for (AlphaState alphaState : resultSet) {
             if (alphaState.isAchieved()) {
@@ -226,6 +227,23 @@ public class Project extends AbstractPersistable {
             }
         }
         return lastState;
+    }
+
+
+    @Programmatic
+    public int getAlphaStateWeight(Alpha alpha) {
+        List<AlphaState> list = new ArrayList(alpha.getAlphaStates());
+        Collections.sort(list, Collections.reverseOrder());
+        Set<AlphaState> resultSet = new LinkedHashSet(list);
+        int weight = list.size() + 1;
+
+        for (AlphaState alphaState : resultSet) {
+            if (alphaState.isAchieved()) {
+                break;
+            }
+            weight--;
+        }
+        return weight;
     }
 
     @MemberOrder(sequence = "3", name = "description")
@@ -254,6 +272,10 @@ public class Project extends AbstractPersistable {
 
     public String default2Update() {
         return getDescription();
+    }
+
+    public WickedChart showChart() {
+        return new WickedChart(new ProjectOptions(this));
     }
 
     @Override

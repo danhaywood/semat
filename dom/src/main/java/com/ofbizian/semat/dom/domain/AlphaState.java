@@ -3,7 +3,6 @@ package com.ofbizian.semat.dom.domain;
 import java.util.SortedSet;
 import javax.jdo.annotations.IdentityType;
 
-import org.apache.commons.lang3.builder.CompareToBuilder;
 import org.apache.isis.applib.annotation.*;
 import org.apache.isis.applib.util.ObjectContracts;
 
@@ -137,14 +136,6 @@ public class AlphaState extends AbstractPersistable {
         }
         return "(" + achieved + "/" + total + ")";
     }
-
-//    @Override
-//    public int compareTo(AbstractPersistable other) {
-//        return new CompareToBuilder()
-//                .append(getSequence(), ((AlphaState) other).getSequence() )
-//                .append(getClass().getName(), other.getClass().getName())
-//                .toComparison();
-//    }
 
     public String title() {
         return getAlpha().getName() + ": " + state.getName();

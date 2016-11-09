@@ -85,6 +85,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.isisaddons.wicket.wickedcharts</groupId>
+            <artifactId>isis-wicket-wickedcharts-cpt</artifactId>
+            <version>1.13.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.isis.core</groupId>
             <artifactId>isis-core-unittestsupport</artifactId>
             <scope>test</scope>
