@@ -5,6 +5,7 @@
 ### Demo
 
 See live demo at [http://semat.ofbizian.com](http://semat.ofbizian.com/)
+(if the above link is not accessible, try [http://188.166.139.191](http://188.166.139.191) or [http://188.166.148.214](http://188.166.148.214) )
 
 ### Screenshot
 
