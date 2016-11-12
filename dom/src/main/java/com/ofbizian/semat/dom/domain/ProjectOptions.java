@@ -43,8 +43,6 @@ public class ProjectOptions extends Options {
         points.add(new Point(project.getWayOfWorkingStatus(), project.getAlphaStateWeight(project.getWayOfWorking())));
 
         setxAxis(new Axis()
-                .setMin(0)
-                .setMax(7)
                 .setCategories(categories)
                 .setTickmarkPlacement(TickmarkPlacement.ON)
                 .setLineWidth(0));
@@ -52,7 +50,7 @@ public class ProjectOptions extends Options {
         setyAxis(new Axis()
                 .setMin(0)
                 .setMax(6)
-                .setShowFirstLabel(false)
+                .setTickInterval(1.0F)
                 .setLineWidth(0)
                 .setGridLineInterpolation(GridlineInterpolation.POLYGON));
 

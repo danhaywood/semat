@@ -235,7 +235,7 @@ public class Project extends AbstractPersistable {
         List<AlphaState> list = new ArrayList(alpha.getAlphaStates());
         Collections.sort(list, Collections.reverseOrder());
         Set<AlphaState> resultSet = new LinkedHashSet(list);
-        int weight = list.size() + 1;
+        int weight = list.size();
 
         for (AlphaState alphaState : resultSet) {
             if (alphaState.isAchieved()) {
@@ -274,7 +274,7 @@ public class Project extends AbstractPersistable {
         return getDescription();
     }
 
-    public WickedChart showChart() {
+    public WickedChart generateAlphaChart() {
         return new WickedChart(new ProjectOptions(this));
     }
 
