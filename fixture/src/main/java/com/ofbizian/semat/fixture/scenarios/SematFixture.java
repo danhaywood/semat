@@ -1,22 +1,21 @@
 package com.ofbizian.semat.fixture.scenarios;
 
+import java.util.List;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
 import com.ofbizian.semat.dom.domain.AlphaType;
 import com.ofbizian.semat.dom.domain.Item;
-import com.ofbizian.semat.dom.domain.Project;
 import com.ofbizian.semat.dom.domain.ProjectRepository;
 import com.ofbizian.semat.dom.domain.State;
 import com.ofbizian.semat.fixture.dom.ItemCreate;
-import com.ofbizian.semat.fixture.dom.ProjectCreate;
-import com.ofbizian.semat.fixture.dom.ProjectTearDown;
 import com.ofbizian.semat.fixture.dom.StateCreate;
 
 public class SematFixture extends AbstractFixtureScript {
 
-    public SematFixture(String userName) {
+    public SematFixture(String userName, List<String> roles) {
         setUserName(userName);
+        setRoles(roles);
     }
 
     public SematFixture() {

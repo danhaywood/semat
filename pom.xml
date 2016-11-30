@@ -16,7 +16,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <isis.version>1.13.0</isis.version>
+        <isis.version>1.13.1.20161130-1236</isis.version>
         <assertj-core.version>2.4.0</assertj-core.version>
         <drools-decisiontables.version>6.4.0.Final</drools-decisiontables.version>
         <optaplanner.version>6.4.0.Final</optaplanner.version>  <!-- 6.4.0.Final-redhat-3 -->
@@ -36,18 +36,25 @@
                 <enabled>false</enabled>
             </releases>
             <snapshots>
+                <enabled>true</enabled>
             </snapshots>
         </repository>
         <repository>
             <id>Cloudbees snapshots</id>
             <url>http://repository-estatio.forge.cloudbees.com/snapshot/</url>
-            <snapshots>
-            </snapshots>
+            <name>CloudBees Snapshots (and Interim Releases)</name>
             <releases>
-                <enabled>false</enabled>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
             </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <layout>default</layout>
         </repository>
-
         <repository>
             <id>fusesource.m2</id>
             <name>FuseSource Community Release Repository</name>

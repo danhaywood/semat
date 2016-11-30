@@ -1,5 +1,6 @@
 package com.ofbizian.semat.app.services.registration;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import javax.inject.Inject;
@@ -8,6 +9,7 @@ import com.ofbizian.semat.fixture.scenarios.SematFixture;
 import org.apache.isis.applib.annotation.DomainService;
 import org.apache.isis.applib.fixturescripts.FixtureScripts;
 import org.apache.isis.applib.services.repository.RepositoryService;
+import org.apache.isis.applib.services.sudo.SudoService;
 import org.apache.isis.applib.services.userreg.UserDetails;
 import org.apache.isis.applib.value.Password;
 import org.isisaddons.module.security.dom.role.ApplicationRole;
@@ -57,7 +59,7 @@ public class AppUserRegistrationService extends SecurityModuleAppUserRegistratio
         final ApplicationTenancy applicationTenancy = applicationTenancyRepository.newTenancy(username, "/" + username, null);
         applicationUser.setTenancy(applicationTenancy);
 
-//        fixtureScripts.runFixtureScript(new SematFixture(username), null);
+        fixtureScripts.runFixtureScript(new SematFixture(username, Arrays.asList(SudoService.ACCESS_ALL_ROLE)), null);
     }
 
     @Inject
